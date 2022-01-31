@@ -1,11 +1,11 @@
 body {
-    font: 20px Montserrat, sans-serif;
+    font-size: 20px; font-family: "Arimo", sans-serif !important;
     line-height: 1.8;
-    color: black;
+    color: navy;
     /*padding-top: 0px !important;*/
   }
 
-p {font-size: 16px; font-family: "Times New Roman", Times, sans-serif; color: navy;}
+p {font-size: 18px; font-family: "Arimo", sans-serif !important; color: navy;}
 .margin {margin-bottom: 15px;}
 
 .container-fluid {
