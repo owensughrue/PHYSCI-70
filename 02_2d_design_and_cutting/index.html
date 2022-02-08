@@ -11,9 +11,9 @@
     <h3> PHYSCI 70: Intro to Digital Fabrication</h3>
     <div class="navbar-nav">
       <h4></h4>
-      <h4><a class="nav-link active" href="./index.html">Home</a></h4>
-      <h4><a class="nav-link" href="./about.html">About</a></h4>
-      <h4><a class="nav-link" href="./final-project.html">Final Project</a></h4>
+      <h4><a class="nav-link active" href="../index.html">Home</a></h4>
+      <h4><a class="nav-link" href="../about.html">About</a></h4>
+      <h4><a class="nav-link" href="../final-project.html">Final Project</a></h4>
     </div>
   </div>
 </nav>
@@ -25,22 +25,106 @@
 
 <div class="container-fluid"> 
 
-### Week 2: 2D Design and Cutting <br>
+  <h1> Week 2: 2D Design and Cutting </h1>
 
-### House of Cards(board)
+  <h2> House of Cards(board) </h2>
 
-For this week's project, I wanted to construct a house of cards... that wasn't really a house of cards! I enjoy playing cards and wanted to build a structure that played off of the idea of what a House of Cards is.  <br>
+  <div class="row">
+    <div class="col-sm-4">
+      ![Tall House](./tall_house.png)
+    </div>
+  </div>
+
+<h4> My Goals for this Project </h4>
+
+For this week's project, I wanted to construct a house of cards... that wasn't really a house of cards! I enjoy playing cards and wanted to build a structure that played off of the idea of what a House of Cards is, a structure that would be a little more stable than a traditional house of (playing) cards.  <br>
 <br>
+
 The project started with measuirng the dimensions of actual playing cards, which I did using calipers. Then, I could use those numbers in Fusion360 to use as the paramaters for my playing cards. To best ensure that the house would be stable, I needed to have slots, or notches, for ends of the cardboard to fit into. Though I initially planned to have an open slot for the end to fit into, Gabby suggested that I simply have a hole in the cardboard on which the cardboard could rest flush, to ensure a more stable fit. <br>
-<!--- show picture of open piece and then closed piece(s)-->
 <br>
-To contstruct a house of cards rather than an open-faced tent of cards, I needed to design three shapes of cards: one with the end piece that could fit through the slot, one with the slot through which I'd put the first piece, and one that could serve as the roof over each individual 2-card house to allow us to build more houses. To ensure better stability, this third piece would fit in to slots on the bottom cards rather than having to rest on the sides of the cards. Given that these "roof cards" would be going through the slots of the bottom cards at an angle rather than flush, I made the end pieces of these cards longer than those of the bottom cards. Also, these slots would have to be wider than the slots for the cards going through flush. I measured the necessary length of the bottom two cards using an x, x, √2 equation in which the length of the roof card (87.39 mm) was my x√2. After the calculations, my x was approximately 61.79 mm and I designed a slot at approximately 61.79 mm up the length of the longer side of the bottom playing cards through which the end of the roof card could fit.
+
+Further, to contstruct a house of cards rather than an open-faced tent of cards, I needed to design three shapes of cards: one with the end piece that could fit through the slot, one with the slot through which I'd put the first piece, and one that could serve as the roof over each individual 2-card house to allow us to build more houses. To ensure better stability, this third piece would fit in to slots on the bottom cards rather than having to rest on the sides of the cards. Given that these "roof cards" would be going through the slots of the bottom cards at an angle rather than flush, I made the end pieces of these cards longer than those of the bottom cards. Also, these slots would have to be wider than the slots for the cards going through flush. I measured the necessary length of the bottom two cards using an x, x, √2 equation in which the length of the roof card (87.39 mm) was my x√2. After the calculations, my x was approximately 61.79 mm and I designed a slot at approximately 61.79 mm up the length of the longer side of the bottom playing cards through which the end of the roof card could fit. <br>
 <br>
-The first card (what we can call the "A" card) has the end piece that will go through the slot of the "B" card and the larger slot that will allow the "C" card to fit through. 
 
-Here is a simple diagram of what I envision for the tool:
+The first card (what we can call the "A" card) has the end piece that will go through the slot of the "B" card and the larger slot that will allow the "C" card to fit through. The "B" card holds the smaller slot for the A card and the larger slot for the C card. The C card only has the two extension pieces (no slots) because it lies horizontally, serving as the roof for the lower "house" and the floor (just as the table does for the first row of houses) for the upper "house(s)." <br>
 
-  ![Diagram](./01_intro/final-project-simple-diagram.png)
+<h4> Working in Fusion360 </h4>
+
+  Here is an example of the paramaters I'd set for a card.
+    <div class="col-sm-4">
+      Modifying parameters
+      ![Modifying Parameters](./1_modify-parameters.png)
+    </div>
+
+  <h4> Fusion360 sketches of each card </h4>
+
+  <div class="row">
+    <div class="col-sm-4">
+      Fusion360 A Card sketch 
+      ![Fusion360 A Card sketch](./a_card_f360_sketch.png)
+    </div>
+    <div class="col-sm-4">
+      Fusion360 B Card sketch 
+      ![Fusion360 B Card sketch](./b_card_f360_sketch.png)
+    </div>
+    <div class="col-sm-4">
+      Fusion360 C Card sketch 
+      ![Fusion360 C Card sketch](./e_card_f360_sketch.png)
+    </div>
+  </div>
+
+<h4> Making the Structure Work </h4>
+
+The suggestion of having a slot through which I could fit the end of one of the cards helped stability immensely. 
+<br>
+
+Here are what the old cards looked like versus the new cards. The open slot made stability very difficult but the closed slot works very well.
+
+  <div class="row">
+    <div class="col-sm-4">
+      Old cards
+      ![Old cards](./old_a_and_b_cards.png)
+    </div>
+    <div class="col-sm-4">
+      New cards
+      ![B card](./new_fit.png)
+    </div>
+  </div>
+
+<br>
+
+Here are pictures of each individual card after coming out of the laster cutter.
+
+  <div class="row">
+    <div class="col-sm-4">
+      A card
+      ![A card](./a_card.png)
+    </div>
+    <div class="col-sm-4">
+      B card
+      ![B card](./b_card.png)
+    </div>
+    <div class="col-sm-4">
+      C card
+      ![C card](./c_card.png)
+    </div>
+  </div>
+
+<h4> A Few of my Structures </h4>
+
+Given that the A card fits into the B card and the C card can fit across the top of an A and B "house," we can build all kinds of neat structures with these cards. Here are a couple that I made. With more cards, we can build more and more unique and interesting houses of cards that we can trust will stay upright!
+
+  <div class="row">
+    <div class="col-sm-4">
+      Tall House
+      ![Tall House](./tall_house.png)
+    </div>
+    <div class="col-sm-4">
+      Wide House
+      ![Wide House](./wide_house.png)
+    </div>
+  </div>
+
 
 </xmp>
 </body>
