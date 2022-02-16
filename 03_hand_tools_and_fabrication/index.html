@@ -25,135 +25,58 @@
 
 <div class="container-fluid"> 
 
-  <h1> Week 2: 2D Design and Cutting </h1>
+  <h1> Week 3: Hand Tools and Fabrication </h1>
 
-  <h2> House of Cards(board) </h2>
+  <h2> Mini Oil Well </h2>
 
   <div class="row">
     <div class="col-sm-4">
-      ![Tall House](./tall_house.png)
+      ![Oil Well](./oil_drummer.png)
     </div>
   </div>
 
-<h4> My Goals for this Project </h4>
+<h4> Reason for Doing this Project </h4>
 
-For this week's project, I wanted to construct a house of cards... that wasn't really a house of cards! I enjoy playing cards and wanted to build a structure that played off of the idea of what a House of Cards is, a structure that would be a little more stable than a traditional house of (playing) cards.  <br>
+I've always found the movement of oil wells interesting, perhaps because I've never visited Texas and always associate them with a place I've never been that seems to hold a certain mystique for me. I'm certainly a proponent of more sustainable energy practices, though the movement of oil wells has always been interesting to me, reminding me of a horse bending down for water. <br>
 <br>
-
-The project started with measuirng the dimensions of actual playing cards, which I did using calipers. Then, I could use those numbers in Fusion360 to use as the paramaters for my playing cards. To best ensure that the house would be stable, I needed to have slots, or notches, for ends of the cardboard to fit into. Though I initially planned to have an open slot for the end to fit into, Gabby suggested that I simply have a hole in the cardboard on which the cardboard could rest flush, to ensure a more stable fit. <br>
+I learned that oil wells are made of up several components, such as the walking beam (the beam that goes up and down), Samson posts (the posts that hold the oil well upright), a crank (which transfers energy from the prime mover to the walking beam), the prime mover (moter), and the horsehead. Many thanks to this video: https://www.youtube.com/watch?v=X0Dpd52pfp0 for explaining the structure of oil wells. I constructed the Samson posts and walking beam out of wood, using a metal pole through the top of the Samson posts and through the middle of the walking beam to allow the structure to be stable and allow the walking beam to bob up and down. I then attached a crank to the motor to generate the rotational force necessary that the walking beam would take to move up and down. To connect the walking beam to the motor, I used a metal pole that went through the end of the walking beam and connected to a laser cut piece of plastic that would serve as the rotational force once connected to the motor. I also lasercut a little hole in this piece through which I could put the crank, allowing it to connect to the motor and the walking beam. <br>
 <br>
+I found that the motor moved slower when I put the red wire into the 3.3 rather than 5v slot in the microcontroller and wanted the motor to move relatively slowly to mimc the motion of an oil well. Though the motor still moves a little too fast to be realistic, the basic up and down motion is there.
 
-Further, to contstruct a house of cards rather than an open-faced tent of cards, I needed to design three shapes of cards: one with the end piece that could fit through the slot, one with the slot through which I'd put the first piece, and one that could serve as the roof over each individual 2-card house to allow us to build more houses. To ensure better stability, this third piece would fit in to slots on the bottom cards rather than having to rest on the sides of the cards. Given that these "roof cards" would be going through the slots of the bottom cards at an angle rather than flush, I made the end pieces of these cards longer than those of the bottom cards. Also, these slots would have to be wider than the slots for the cards going through flush. I measured the necessary length of the bottom two cards using an x, x, √2 equation in which the length of the roof card (87.39 mm) was my x√2. After the calculations, my x was approximately 61.79 mm and I designed a slot at approximately 61.79 mm up the length of the longer side of the bottom playing cards through which the end of the roof card could fit. <br>
-<br>
+<video width="480" height="240" controls>
+  <source src="oil_drum.mov" type="video/mp4">
+</video>
 
-The first card (what we can call the "A" card) has the end piece that will go through the slot of the "B" card and the larger slot that will allow the "C" card to fit through. The "B" card holds the smaller slot for the A card and the larger slot for the C card. The C card only has the two extension pieces (no slots) because it lies horizontally, serving as the roof for the lower "house" and the floor (just as the table does for the first row of houses) for the upper "house(s)." <br>
+Code for inserting video came from: https://www.w3schools.com/html/html5_video.asp. <br>
+This would certainly bring up oil pretty quickly, perhaps if it had a few more tons of strength!
 
-<h4> Working in Fusion360 </h4>
+<h4> Getting Measurements on the Circuit </h4>
 
-  Here is an example of the paramaters I'd set for a card.
-    <div class="col-sm-4">
-      Modifying parameters
-      ![Modifying Parameters](./1_modify-parameters.png)
-    </div>
-
-  <h4> Fusion360 sketches of each card </h4>
-
+Here is my circuit on the breadboard:
   <div class="row">
     <div class="col-sm-4">
-      Fusion360 A Card sketch 
-      ![Fusion360 A Card sketch](./a_card_f360_sketch.png)
-    </div>
-    <div class="col-sm-4">
-      Fusion360 B Card sketch 
-      ![Fusion360 B Card sketch](./b_card_f360_sketch.png)
-    </div>
-    <div class="col-sm-4">
-      Fusion360 C Card sketch 
-      ![Fusion360 C Card sketch](./e_card_f360_sketch.png)
+      ![Oil Well Breadboard](./oil_well_breadboard.png)
     </div>
   </div>
 
-<h4> Making the Structure Work </h4>
+To measure the voltage of the cicuit, I used the multimeter and held the sensors to the resistor and found the voltage to be 3.29 volts. Using Ohm's law to calculate the current, I can use the formula ∆V = iR (thanks to https://www.google.com/search?q=ohm%27s+law&oq=ohm&aqs=chrome.0.69i59j69i57j0i433i512j0i131i433i512l2j0i433i512l2j0i10i131i433i512j0i131i433i512j0i512.5052j0j7&sourceid=chrome&ie=UTF-8 for explaining that R stands for resistance). We know that the voltage = 3.29 Volts and the resistance is 10,000 ohms (thanks to https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-resistor-color-code for helping me calculate the resistance of my resistor). So, we can divide 3.29 / 10,000 to get 3.29x10<sup> -4 </sup> Amperes.
 
-The suggestion of having a slot through which I could fit the end of one of the cards helped stability immensely. 
-<br>
 
-Here are what the old cards looked like versus the new cards. The open slot made stability very difficult but the closed slot works very well.
 
   <div class="row">
     <div class="col-sm-4">
-      Old cards
-      ![Old cards](./old_a_and_b_cards.png)
-    </div>
-    <div class="col-sm-4">
-      New cards
-      ![B card](./new_fit.png)
+      ![Voltage Measure](./voltage_measure.png)
     </div>
   </div>
 
-<br>
 
-Here are pictures of each individual card after coming out of the laster cutter.
+<h4> Helpful Links </h4>
 
-  <div class="row">
-    <div class="col-sm-4">
-      A card
-      ![A card](./a_card.png)
-    </div>
-    <div class="col-sm-4">
-      B card
-      ![B card](./b_card.png)
-    </div>
-    <div class="col-sm-4">
-      C card
-      ![C card](./c_card.png)
-    </div>
-  </div>
+Explains the structure of oil wells and how they work: https://www.youtube.com/watch?v=X0Dpd52pfp0
 
-<h4> A Few of my Structures </h4>
-
-Given that the A card fits into the B card and the C card can fit across the top of an A and B "house," we can build all kinds of neat structures with these cards. Here are a couple that I made. With more cards, we can build more and more unique and interesting houses of cards that we can trust will stay upright!
-
-  <div class="row">
-    <div class="col-sm-4">
-      Tall House
-      ![Tall House](./tall_house.png)
-    </div>
-    <div class="col-sm-4">
-      Wide House
-      ![Wide House](./wide_house.png)
-    </div>
-  </div>
-
-  <h2> Household Items Sketches </h2>
-
-For this week's designs, I sketched two somewhat cylindrical objects, a pencil and my water bottle. Given that I plan to incorporate cylindrical designs into my final project, my hope is that getting more familiar with cylindars will help me down the line.  <br>
-<br>
-
-<h4> My Pencil </h4>
-To design my pencil, I designed half of the pencil in 2d and then revolved the design around the center axis to make the pencil a 3d object (many thanks to Chris Zhu for his help with this! Also, this video: https://www.youtube.com/watch?v=U7ABI9PSjkM helped me as well.) In 2d, I designed the half-cone shaped portion for the wood part with the lead tip at the end and a rectangle (which I would revolve around the center axis) for the main body. After sketching half of the pencil in 2d, I revolved and was very pleased with how the pencil came out. Thank you again to Chris!<br>
-
-  Here is my sketch of my pencil in Fusion360.
-    <div class="col-sm-4">
-      My pencil
-      ![My pencil](./pencil_model.png)
-    </div>
-
-<h4> My Water Bottle </h4>
-To design the water bottle, I also used the revolve feature to design the water bottle in 2d and then revolve it around the center axis to make give the water bottle its shape. Originally, I designed half of the water bottle (like I did with the pencil) with the plan of revolving it around to shape it. Unfortunately, this would mean that the water bottle was solid all the way around! To make the inside of the bottle hollow, I drew lines just inside the edge of the bottle that would make the outside of the bottle very thin and then trimmed away the parts of the bottle between that line and the center axis. Then, I could revolve the water bottle around the center axis. The payoff was great! The water bottle is hollow inside and, thanks to drawing and filleting multiple lines, the inside of the bottle follows the shape of the outside of the bottle and is hollow all the way through, conforming to the shape of the bottle.
-
-
-  <div class="row">
-    <div class="col-sm-4">
-      My water bottle 
-      ![My water bottle](./water_bottle_sketch.png)
-    </div>
-
-  <div class="row">
-    <div class="col-sm-4">
-      My water bottle from the top
-      ![My water bottle](./water_bottle_sketch_top.png)
-    </div>
+<h4> Final Notes </h4>
+Again, I am incredibly sorry that I completed this project late (I finshed it on Tuesday night). I completely understand any pentalites that result from this and will try very hard to make sure I'm on time next week.
+Thank you very much to the teaching staff for their help with this project.
 
 
 </xmp>
