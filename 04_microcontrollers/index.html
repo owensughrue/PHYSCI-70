@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>PHYSCI 70: Intro to Digital Fabrication </title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="./style.css" rel="stylesheet">
+
+<!-- This navbar element requires an additional library (included at the bottom of the page) -->
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div style="align-items: left; justify-content:left;" class="container-fluid">
+    <h3> PHYSCI 70: Intro to Digital Fabrication</h3>
+    <div class="navbar-nav">
+      <h4></h4>
+      <h4><a class="nav-link active" href="../index.html">Home</a></h4>
+      <h4><a class="nav-link" href="../about.html">About</a></h4>
+      <h4><a class="nav-link" href="../final-project.html">Final Project</a></h4>
+    </div>
+  </div>
+</nav>
+
+
+<body style="padding-top: 0px;">
+  
+<xmp theme="bootstrap" style="display:none;">
+
+<div class="container-fluid"> 
+
+  <h1> Week 4: Microcontroller Programming </h1>
+
+  <h2> Seesaw </h2>
+
+  <div class="row">
+    <div class="col-sm-4">
+      ![Seesaw](./seesaw_general.png)
+    </div>
+  </div>
+
+<h4> Reason for Doing this Project </h4>
+
+I wanted to build off of my project from [last week](../03_hand_tools_and_fabrication/index.html) in which I built an oil drum. This week, I wanted to build a seesaw, with the up and down motion controlled by a motor.
+
+<h4> Getting Started </h4>
+
+<br>
+Thankfully, I had some parts that I could recycle from last week. What were the Samson Posts of the oil drum became the foundations of the seesaw, between which was the fulcrum. I did, however, have to saw a new piece of wood that would serve as the wood for the board of the seesaw given that the walking beam of the oil drum was too short. For the seesaw (different from the oil drum), I wanted the pole that ran through the two foundation pieces and the board to be tight enough to the board that the board would rotate as the pole did. While I wanted the walking beam of the oil drum to move independently of the pole, if the seesaw board were too lose, rotating the pole would not move the board. I planned for the motor to attach to and rotate the pole, moving the seesaw up and down.
+<br>
+
+I drilled a whole in the seesaw just about the same diameter as the pole that went through the two foundation pieces and the board. The fit was tight enough such that I needed to push very hard to get the pole through the hole I drilled, but that was just fine given that, now, whenever the pole rotated, the board would as well. Next up came trying to attach the motor to the pole. Originally, I tried gluing the pieces together, but Ibrahim explained to me (very kindly!) how ridiculous of an idea that was! He explained that it made more sense to laser cut a couple of pieces of acryllic that I could pressfit—one to the motor and one to the pole, with both having holes through which I could put a screw to keep them together. I placed the screw through one end and used a nut to screw them together tightly. This method is far more stable than glue and works a lot better—thank you, Ibrahim!
+
+These are the pieces in Fusion 360:
+
+  <div class="row">
+    <div class="col-sm-4">
+      ![Binding Wheels](./binding_wheels.png)
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-4">
+      ![Motor pieces](./motor_pieces.png)
+    </div>
+  </div>
+
+Here you can see how the two pieces fit together nicely. Importantly, given the thickness of the acryllic, it's necessary to hold the motor at a certain angle so that the screws do not hit the motor and can run smoothly.
+<br>
+
+<h4> Programming the Microcontroller </h4>
+
+Now that the motor was attached to the structure, it was time to program the motor to rotate such that the seesaw would move up and down! I drew largely from the code we used in class, which was incredibly helpful.
+
+Here is what my code looks like:
+  <div class="row">
+    <div class="col-sm-4">
+      ![Arduino Code](./arduino_code.png)
+    </div>
+  </div>
+
+The comments are very helpful, but the first two lines of code ensure that pin 3 of the microcontroller is connected to A-1A of the L9110 and pin for is connected to A-1B of the L9110.
+The next few lines of code, which define pins A-1A and A-1B as outputs, ensure that those pins will be doing what the Arduino tells them to do.
+Starting with A-1A at 0 (as A-1B is set to LOW) ensures that the motor is off to start.
+The next batch of code ensures that the motor is running at full power (the 255 number illustrates that) for 4 seconds (the delay(4000)) line runs this for 4000 milliseconds.
+Next, setting A-1A to 0 gives no power to the motor, stopping it for 1500 milliseconds.
+Then, to reverse direction, we set digitalWrite for A-1B to HIGH and want to move the motor at full power in the other direction. Now, though, because A-1B is set to HIGH, we put analogWrite for A-1A to 0 (255-255) and delay (4000) to run the motor for 4000 milliseconds.
+Finally, to stop the motor, we set digitalWrite for A-1B back to LOW and analogWrite for A-1A to 0, which will give no power to the motor. We set delay (1500) to run the motor for 1500 milliseconds. After this process is complete, the loop continues! (Thanks to [this link](https://www.circuitbasics.com/using-loops-in-arduino-programming/#:~:text=Loops%20are%20used%20to%20control,an%20iteration%20of%20the%20loop.) for help with understanding that loops continue over and over).
+
+<h4> Connecting the Wires from the L9110 to the Microcontroller to Arduino </h4>
+
+To really make the seesaw work, it was important to connect the wires! Like the code explains, I connected the VCC port of the L9110 to the 5V port in the microcontroller, the GND port of the L9110 to the GND port of the microcontroller, the A-1A port of the L9110 to the 3 port of the microcontroller, and the A-1B port of the L9110 to the 4 port of the microcontroller.
+
+  <div class="row">
+    <div class="col-sm-4">
+      ![Motor Components](./motor_components.png)
+    </div>
+  </div>
+
+After connecting the L9110 to the Micro controller to my computer (the power source), we can see the seesaw work!
+<br>
+
+
+
+<video width="720" height="480" controls>
+  <source src="seesaw_moving_final.mov" type="video/mp4">
+</video>
+
+Given the strength of the motor required to move the seesaw, I found it necessary to hold the motor very tightly and in a position where the screws and the nuts do not get in the way of the motor and foundation pieces, respectively.
+There are probably more fun seesaws to use on most playgrounds! :)
+
+
+<h4> Helpful Links </h4>
+
+Explaining a little about loops in Arduino: https://www.circuitbasics.com/using-loops-in-arduino-programming/#:~:text=Loops%20are%20used%20to%20control,an%20iteration%20of%20the%20loop.
+
+<h4> Final Notes </h4>
+Thank you so much to the teaching staff for their help with this project!
+
+
+</xmp>
+</body>
+
+<script src="https://strapdownjs.com/v/0.2/strapdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+
+</html>
