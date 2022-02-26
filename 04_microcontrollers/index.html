@@ -69,12 +69,44 @@ Here you can see how the two pieces fit together nicely. Importantly, given the 
 
 Now that the motor was attached to the structure, it was time to program the motor to rotate such that the seesaw would move up and down! I drew largely from the code we used in class, which was incredibly helpful.
 
-Here is what my code looks like:
-  <div class="row">
-    <div class="col-sm-4">
-      ![Arduino Code](./arduino_code.png)
-    </div>
-  </div>
+Here is what my code looks like: <br>
+<br>
+<code>
+// Thank you to the teaching staff of PS70 for providing the foundations of this code! <br>
+// I changed numbersto fit the motor and my structure, but the bulk of this code comes from our class website. <br>
+<br>
+const int A1A = 3;  // define pin 3 for A-1A (PWM Speed) <br>
+const int A1B = 4;  // define pin 4 for A-1B (direction) <br>
+<br>
+void setup() { <br>
+  pinMode(A1A, OUTPUT);     // specify these pins as outputs <br>
+  pinMode(A1B, OUTPUT); <br>
+  analogWrite(A1A, 0);   // start with the motors off <br>
+  digitalWrite(A1B, LOW); <br>
+} <br>
+<br>
+void loop() { <br>
+  // start the motor at a low speed <br>
+  analogWrite(A1A, 255);  <br>
+  digitalWrite(A1B, LOW); <br>
+  delay(4000); // allow the motor to run for 4 seconds <br>
+<br>
+  // stop the motor <br>
+  analogWrite(A1A, 0);   // setting both pins LOW stops the motor <br>
+  delay(1500);              // keep the motor off for 2 seconds <br>
+<br>
+  // start the motor at a low speed in the other direction <br>
+  analogWrite(A1A, 0);  <br>
+  digitalWrite(A1B, HIGH); <br>
+  delay(4000);              // allow the motor to run for 4 seconds <br>
+<br>
+  // stop the motor <br>
+  analogWrite(A1A, 0);   // setting both pins LOW stops the motor <br>
+  digitalWrite(A1B, LOW); <br>
+  delay(1500);  // keep the motor off for 2 seconds <br>
+}<br></code>
+
+Thanks to [this link](http://web.simmons.edu/~grabiner/comm244/weekfour/code-test.html#:~:text=You%20can%20include%20code%20examples,code%20as%20what%20it%20is.) for help with showing code as <code> code</code> in html.
 
 The comments are very helpful, but the first two lines of code ensure that pin 3 of the microcontroller is connected to A-1A of the L9110 and pin for is connected to A-1B of the L9110.
 The next few lines of code, which define pins A-1A and A-1B as outputs, ensure that those pins will be doing what the Arduino tells them to do.
