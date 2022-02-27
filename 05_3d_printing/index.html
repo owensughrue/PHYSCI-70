@@ -25,9 +25,9 @@
 
 <div class="container-fluid"> 
 
-  <h1> Week 4: Microcontroller Programming </h1>
+  <h1> Week 5: 3D Design and Printing </h1>
 
-  <h2> Seesaw </h2>
+  <h2> Sleeve for Final Project </h2>
 
   <div class="row">
     <div class="col-sm-4">
@@ -37,28 +37,31 @@
 
 <h4> Reason for Doing this Project </h4>
 
-I wanted to build off of my project from [last week](../03_hand_tools_and_fabrication/index.html) in which I built an oil drum. This week, I wanted to build a seesaw, with the up and down motion controlled by a motor.
+For this project, I wanted to prototype a component needed for my final project. For my final project, in which I'm planning to build a device that can spread pizza evenly using a central motor and a wing that spreads the pizza sauce around, I'd like for the motor and the wing to remain clean the whole time so that sauce doesn't get into those parts and potentially damage the motor. One way to ensure these stay clean is to fit a sleeve around both the central motor and the wing. This week, I designed a mini version of the sleeve for the wing.
 
 <h4> Getting Started </h4>
 
 <br>
-Thankfully, I had some parts that I could recycle from last week. What were the Samson Posts of the oil drum became the foundations of the seesaw, between which was the fulcrum. I did, however, have to saw a new piece of wood that would serve as the wood for the board of the seesaw given that the walking beam of the oil drum was too short. For the seesaw (different from the oil drum), I wanted the pole that ran through the two foundation pieces and the board to be tight enough to the board that the board would rotate as the pole did. While I wanted the walking beam of the oil drum to move independently of the pole, if the seesaw board were too lose, rotating the pole would not move the board. I planned for the motor to attach to and rotate the pole, moving the seesaw up and down.
+I first designed the sleeve in Fusion 360, drawing a line and then using the circle-drawing piece to build the rounded end-piece, trimming away the unneeded parts to get the shape I wanted. Here is what the sketch looked like in 2d. 
 <br>
+  <div class="row">
+    <div class="col-sm-4">
+      ![Sleeve in Sketch Mode](./sleeve_sketch_mode.png)
+    </div>
+  </div>
 
-I drilled a whole in the seesaw just about the same diameter as the pole that went through the two foundation pieces and the board. The fit was tight enough such that I needed to push very hard to get the pole through the hole I drilled, but that was just fine given that, now, whenever the pole rotated, the board would as well. Next up came trying to attach the motor to the pole. Originally, I tried gluing the pieces together, but Ibrahim explained to me (very kindly!) how ridiculous of an idea that was! He explained that it made more sense to laser cut a couple of pieces of acryllic that I could pressfit—one to the motor and one to the pole, with both having holes through which I could put a screw to keep them together. I placed the screw through one end and used a nut to screw them together tightly. This method is far more stable than glue and works a lot better—thank you, Ibrahim!
+One obstacle for this week was that I wanted the sleeve to be hollow and in a more oblong shape, rather than cylindrical. [This link](https://forums.autodesk.com/t5/fusion-360-design-validate/revolving-around-ellipse/td-p/8982216) helped me understand that the revolve feature revolves objects in a circle. Because I wanted the shape to be hollow in the inside, I decided to extrude the object and then make it hollow using the shell command. This was incredibly helpful! [This link](https://www.youtube.com/watch?v=NNPPcCx2Jqc&t=136s&ab_channel=TheFusionEssentials) helped me learn how to properly use the shell command. Then, I selected the end of the sleeve that I'd use to slide onto the wing of the machine and chose the thickness of the sketch (0.5 mm if I remember correctly) that I wanted. Now, the piece was hollow with an opening at the end. Additionally, once in 3d mode, I used the fillet command to round the edges of the sleeve, mimicking the rounded body of a spoon—what people often use to spread sauce! <br>
+Here is what it looked like in 3d mode in Fusion.
 
 These are the pieces in Fusion 360:
 
   <div class="row">
     <div class="col-sm-4">
-      ![Binding Wheels](./binding_wheels.png)
+      ![Sleeve in 3d Mode](./sleeve_3d_mode_fusion.png)
     </div>
-  </div>
-
-
   <div class="row">
     <div class="col-sm-4">
-      ![Motor pieces](./motor_pieces.png)
+      ![Sleeve in 3d Mode](./sleeve_3d_mode_fusion_2.png)
     </div>
   </div>
 
