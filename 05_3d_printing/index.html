@@ -42,13 +42,39 @@ For this project, I wanted to prototype a component needed for my final project.
 <h4> Getting Started </h4>
 
 <br>
-I first designed the sleeve in Fusion 360, drawing a line and then using the circle-drawing piece to build the rounded end-piece, trimming away the unneeded parts to get the shape I wanted. Here is what the sketch looked like in 2d. 
+I first designed the sleeve in Fusion 360, drawing a line and then using the circle-drawing piece to build the rounded end-piece, trimming away the unneeded parts to get the shape I wanted. Here is what the sketch looked like in 2d (in solid mode in Fusion without the 3-D body).
 <br>
   <div class="row">
     <div class="col-sm-4">
-      ![Sleeve in Sketch Mode](./sleeve_sketch_mode.png)
+      ![Sleeve without 3-D body (2d)](./sleeve_without_body_2d.png)
     </div>
   </div>
+
+Here is what the sleeve looked like in 3-D mode.
+<br>
+  <div class="row">
+    <div class="col-sm-4">
+      ![Sleeve in 3-D](./sleeve_in_3d.png)
+    </div>
+  </div>
+
+Then, I exported the proejct to Prusa to eventually be able to print it. Here is what the project looked like in prusa, with the regular mode on the left and individual layers mode on the right.
+
+<!-- SHOW BOTH PICTURES -->
+<br>
+  <div class="row">
+    <div class="col-sm-4">
+      ![Prusa Regular Mode](./prusa_regular_mode.png)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      ![Prusa Slicing Mode](./prusa_slicing_mode.png)
+    </div>
+  </div>
+
+
+One thing to note is the size of the filament 
 
 One obstacle for this week was that I wanted the sleeve to be hollow and in a more oblong shape, rather than cylindrical. [This link](https://forums.autodesk.com/t5/fusion-360-design-validate/revolving-around-ellipse/td-p/8982216) helped me understand that the revolve feature revolves objects in a circle. Because I wanted the shape to be hollow in the inside, I decided to extrude the object and then make it hollow using the shell command. This was incredibly helpful! [This link](https://www.youtube.com/watch?v=NNPPcCx2Jqc&t=136s&ab_channel=TheFusionEssentials) helped me learn how to properly use the shell command. Then, I selected the end of the sleeve that I'd use to slide onto the wing of the machine and chose the thickness of the sketch (0.5 mm if I remember correctly) that I wanted. Now, the piece was hollow with an opening at the end. Additionally, once in 3d mode, I used the fillet command to round the edges of the sleeve, mimicking the rounded body of a spoon—what people often use to spread sauce! <br>
 Here is what it looked like in 3d mode in Fusion.
@@ -59,6 +85,7 @@ These are the pieces in Fusion 360:
     <div class="col-sm-4">
       ![Sleeve in 3d Mode](./sleeve_3d_mode_fusion.png)
     </div>
+  </div>
   <div class="row">
     <div class="col-sm-4">
       ![Sleeve in 3d Mode](./sleeve_3d_mode_fusion_2.png)
