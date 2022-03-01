@@ -27,11 +27,11 @@
 
   <h1> Week 5: 3D Design and Printing </h1>
 
-  <h2> Sleeve for Final Project </h2>
+  <h2> Sleeve Prototype for Final Project </h2>
 
   <div class="row">
     <div class="col-sm-4">
-      ![Seesaw](./seesaw_general.PNG)
+      ![Printed Sleeve](./printed_sleeve_1.png)
     </div>
   </div>
 
@@ -40,9 +40,12 @@
 For this project, I wanted to prototype a component needed for my final project. For my final project, in which I'm planning to build a device that can spread pizza evenly using a central motor and a wing that spreads the pizza sauce around, I'd like for the motor and the wing to remain clean the whole time so that sauce doesn't get into those parts and potentially damage the motor. One way to ensure these stay clean is to fit a sleeve around both the central motor and the wing. This week, I designed a mini version of the sleeve for the wing.
 
 <h4> Getting Started </h4>
+I first designed the sleeve in Fusion 360, drawing a line and then using the circle-drawing piece to build the rounded end-piece, trimming away the unneeded parts to get the shape I wanted.
+One obstacle for this week was that I wanted the sleeve to be hollow and in a more oblong shape, rather than cylindrical. [This link](https://forums.autodesk.com/t5/fusion-360-design-validate/revolving-around-ellipse/td-p/8982216) helped me understand that the revolve feature revolves objects in a circle. Because I wanted the shape to be hollow in the inside, I decided to extrude the object and then make it hollow using the shell command. This was incredibly helpful! [This link](https://www.youtube.com/watch?v=NNPPcCx2Jqc&t=136s&ab_channel=TheFusionEssentials) helped me learn how to properly use the shell command. Then, I selected the end of the sleeve that I'd use to slide onto the wing of the machine and chose the thickness of the sketch (0.5 mm if I remember correctly) that I wanted. Now, the piece was hollow with an opening at the end. Additionally, once in 3d mode, I used the fillet command to round the edges of the sleeve, mimicking the rounded body of a spoon—what people often use to spread sauce! <br>
+Here is what it looked like in 3d mode in Fusion.
 
-<br>
-I first designed the sleeve in Fusion 360, drawing a line and then using the circle-drawing piece to build the rounded end-piece, trimming away the unneeded parts to get the shape I wanted. Here is what the sketch looked like in 2d (in solid mode in Fusion without the 3-D body).
+These are the pieces in Fusion 360 (both with the body removed in solid mode to see just the 2-D sketch (without the body in solid mode):
+
 <br>
   <div class="row">
     <div class="col-sm-4">
@@ -58,9 +61,8 @@ Here is what the sleeve looked like in 3-D mode.
     </div>
   </div>
 
-Then, I exported the proejct to Prusa to eventually be able to print it. Here is what the project looked like in prusa, with the regular mode on the left and individual layers mode on the right.
+Then, I exported the proejct to Prusa to eventually be able to print it. Here is what the project looked like in prusa, with the regular mode on the top and individual layers mode on the bottom.
 
-<!-- SHOW BOTH PICTURES -->
 <br>
   <div class="row">
     <div class="col-sm-4">
@@ -74,103 +76,37 @@ Then, I exported the proejct to Prusa to eventually be able to print it. Here is
   </div>
 
 
-One thing to note is the size of the filament 
+One thing to note is the size of the filament. For efficiency, I selected the 0.30 DRAFT option for the print settings. This was helpful for lots of reasons: It gave me a print time of 59 minutes (as opposed to something like 6 hours if I were to use one of the smallest filaments!), this setting still gave me a very good prototype of this part, and also helped me to see that I'd like to go with a smaller filament for my final project to try to make the part of the sleeve that would be spreading the sauce around as smooth as possible, to mimic the surface of a spoon.
 
-One obstacle for this week was that I wanted the sleeve to be hollow and in a more oblong shape, rather than cylindrical. [This link](https://forums.autodesk.com/t5/fusion-360-design-validate/revolving-around-ellipse/td-p/8982216) helped me understand that the revolve feature revolves objects in a circle. Because I wanted the shape to be hollow in the inside, I decided to extrude the object and then make it hollow using the shell command. This was incredibly helpful! [This link](https://www.youtube.com/watch?v=NNPPcCx2Jqc&t=136s&ab_channel=TheFusionEssentials) helped me learn how to properly use the shell command. Then, I selected the end of the sleeve that I'd use to slide onto the wing of the machine and chose the thickness of the sketch (0.5 mm if I remember correctly) that I wanted. Now, the piece was hollow with an opening at the end. Additionally, once in 3d mode, I used the fillet command to round the edges of the sleeve, mimicking the rounded body of a spoon—what people often use to spread sauce! <br>
-Here is what it looked like in 3d mode in Fusion.
-
-These are the pieces in Fusion 360:
-
+<h4> First Try </h4>
   <div class="row">
     <div class="col-sm-4">
-      ![Sleeve in 3d Mode](./sleeve_3d_mode_fusion.png)
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      ![Sleeve in 3d Mode](./sleeve_3d_mode_fusion_2.png)
+      ![First Try Prototype](./first_try_prototype.png)
     </div>
   </div>
 
-Here you can see how the two pieces fit together nicely. Importantly, given the thickness of the acryllic, it's necessary to hold the motor at a certain angle so that the screws do not hit the motor and can run smoothly.
+Originally, I made my prototype very small because I felt I was more interested in getting a sense of this component rather than making the final one. However, though this try was good in that the print took only 10 minutes, there wasn't quite enough structural integrity for the filament of the top row to stay in tact across the body of the sleeve. You can see the top layer now quite getting across the whole body of the sleeve in the picture below.<br>
+However, good thing that only took 10 minutes and used a small amount of filament! Now, for the second version, I wanted to make the thickness larger. The thickness on the first try was very small, and I wondered if that was part of the issue in the top layer not having enough of a foundation to fully get across the body of the sleeve. Here is what the thickness of the first prototype looked like. You can see how the thickness of the second prototype is much thicker than that of the first.
 <br>
-
-<h4> Programming the Microcontroller </h4>
-
-Now that the motor was attached to the structure, it was time to program the motor to rotate such that the seesaw would move up and down! I drew largely from the code we used in class, which was incredibly helpful.
-
-Here is what my code looks like: <br>
-<br>
-<code>
-// Thank you to the teaching staff of PS70 for providing the foundations of this code! <br>
-// I changed numbersto fit the motor and my structure, but the bulk of this code comes from our class website. <br>
-<br>
-const int A1A = 3;  // define pin 3 for A-1A (PWM Speed) <br>
-const int A1B = 4;  // define pin 4 for A-1B (direction) <br>
-<br>
-void setup() { <br>
-  pinMode(A1A, OUTPUT);     // specify these pins as outputs <br>
-  pinMode(A1B, OUTPUT); <br>
-  analogWrite(A1A, 0);   // start with the motors off <br>
-  digitalWrite(A1B, LOW); <br>
-} <br>
-<br>
-void loop() { <br>
-  // start the motor at a low speed <br>
-  analogWrite(A1A, 255);  <br>
-  digitalWrite(A1B, LOW); <br>
-  delay(4000); // allow the motor to run for 4 seconds <br>
-<br>
-  // stop the motor <br>
-  analogWrite(A1A, 0);   // setting both pins LOW stops the motor <br>
-  delay(1500);              // keep the motor off for 2 seconds <br>
-<br>
-  // start the motor at a low speed in the other direction <br>
-  analogWrite(A1A, 0);  <br>
-  digitalWrite(A1B, HIGH); <br>
-  delay(4000);              // allow the motor to run for 4 seconds <br>
-<br>
-  // stop the motor <br>
-  analogWrite(A1A, 0);   // setting both pins LOW stops the motor <br>
-  digitalWrite(A1B, LOW); <br>
-  delay(1500);  // keep the motor off for 2 seconds <br>
-}<br>
-</code>
-
-Thanks to [this link](http://web.simmons.edu/~grabiner/comm244/weekfour/code-test.html#:~:text=You%20can%20include%20code%20examples,code%20as%20what%20it%20is.) for help with showing code as <code> code</code> in html.
-
-The comments are very helpful, but the first two lines of code ensure that pin 3 of the microcontroller is connected to A-1A of the L9110 and pin for is connected to A-1B of the L9110.
-The next few lines of code, which define pins A-1A and A-1B as outputs, ensure that those pins will be doing what the Arduino tells them to do.
-Starting with A-1A at 0 (as A-1B is set to LOW) ensures that the motor is off to start.
-The next batch of code ensures that the motor is running at full power (the 255 number illustrates that) for 4 seconds (the delay(4000)) line runs this for 4000 milliseconds.
-Next, setting A-1A to 0 gives no power to the motor, stopping it for 1500 milliseconds.
-Then, to reverse direction, we set digitalWrite for A-1B to HIGH and want to move the motor at full power in the other direction. Now, though, because A-1B is set to HIGH, we put analogWrite for A-1A to 0 (255-255) and delay (4000) to run the motor for 4000 milliseconds.
-Finally, to stop the motor, we set digitalWrite for A-1B back to LOW and analogWrite for A-1A to 0, which will give no power to the motor. We set delay (1500) to run the motor for 1500 milliseconds. After this process is complete, the loop continues! (Thanks to [this link](https://www.circuitbasics.com/using-loops-in-arduino-programming/#:~:text=Loops%20are%20used%20to%20control,an%20iteration%20of%20the%20loop.) for help with understanding that loops continue over and over).
-
-<h4> Connecting the Wires from the L9110 to the Microcontroller to Arduino </h4>
-
-To really make the seesaw work, it was important to connect the wires! Like the code explains, I connected the VCC port of the L9110 to the 5V port in the microcontroller, the GND port of the L9110 to the GND port of the microcontroller, the A-1A port of the L9110 to the 3 port of the microcontroller, and the A-1B port of the L9110 to the 4 port of the microcontroller.
-
   <div class="row">
     <div class="col-sm-4">
-      ![Motor Components](./motor_components.png)
+      ![First Try Prototype Thickness](./first_try_width.png)
     </div>
   </div>
 
-After connecting the L9110 to the Micro controller to my computer (the power source), we can see the seesaw work!
+<h4> Scanning Something </h4>
+For this week's scanning assignment, I decided to scan my winter hat. I used the Polycam app to scan my hat and it came out pretty well. I rotated around the hat, with the app taking several photos or "captures" to get a sense of the size of the object. Here is a picture of how the hat came out after the scans. Also, [here](https://poly.cam/capture/81BB841C-AFAA-41DA-9731-49C2DCA207D8) is the link to the poly.cam capture of the hat.
 <br>
-
-
-
-<video width="720" height="480" controls>
-  <source src="seesaw_moving_final.mov" type="video/mp4">
-</video>
-
-Given the strength of the motor required to move the seesaw, I found it necessary to hold the motor very tightly and in a position where the screws and the nuts do not get in the way of the motor and foundation pieces, respectively.
-There are probably more fun seesaws to use on most playgrounds! :)
+  <div class="row">
+    <div class="col-sm-4">
+      ![Polycam Winter Hat Photo](./scanned_hat.png)
+    </div>
+  </div>
 
 
 <h4> Helpful Links </h4>
+
+Helped me better understand revolving in Fusion 360: https://forums.autodesk.com/t5/fusion-360-design-validate/revolving-around-ellipse/td-p/8982216
 
 Helped me with the shell function in Fusion 360: https://www.youtube.com/watch?v=NNPPcCx2Jqc&t=136s&ab_channel=TheFusionEssentials
 
