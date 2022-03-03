@@ -29,6 +29,8 @@
 
   <h2> Mini Oil Well </h2>
 
+Last updated: March 3, 2022
+
   <div class="row">
     <div class="col-sm-4">
       ![Oil Well](./oil_drummer.png)
@@ -37,18 +39,17 @@
 
 <h4> Reason for Doing this Project </h4>
 
-I've always found the movement of oil wells interesting, perhaps because I've never visited Texas and always associate them with a place I've never been that seems to hold a certain mystique for me. I'm certainly a proponent of more sustainable energy practices, though the movement of oil wells has always been interesting to me, reminding me of a horse bending down for water. <br>
+I've always found the movement of oil wells interesting, perhaps because I've never visited Texas and always associate them with a place I've never been that seems to hold a certain mystique for me. While I'm certainly a proponent of more sustainable energy practices, the movement of oil wells has always been interesting to me, reminding me of a horse bending down for water. <br>
 <br>
-I learned that oil wells are made of up several components, such as the walking beam (the beam that goes up and down), Samson posts (the posts that hold the oil well upright), a crank (which transfers energy from the prime mover to the walking beam), the prime mover (moter), and the horsehead. Many thanks to this video: https://www.youtube.com/watch?v=X0Dpd52pfp0 for explaining the structure of oil wells. I constructed the Samson posts and walking beam out of wood, using a metal pole through the top of the Samson posts and through the middle of the walking beam to allow the structure to be stable and allow the walking beam to bob up and down. I then attached a crank to the motor to generate the rotational force necessary that the walking beam would take to move up and down. To connect the walking beam to the motor, I used a metal pole that went through the end of the walking beam and connected to a laser cut piece of plastic that would serve as the rotational force once connected to the motor. I also lasercut a little hole in this piece through which I could put the crank, allowing it to connect to the motor and the walking beam. <br>
+I learned that oil wells are made of up several components, such as the walking beam (the top beam that goes up and down), Samson posts (the posts that hold the oil well upright), a crank (a arm which transfers energy from the prime mover (motor) to the walking beam, and the horsehead (at the very end of the walking beam and looks somewhat like a horse). Many thanks to [this video](https://www.youtube.com/watch?v=X0Dpd52pfp0) and [this website](https://energyeducation.ca/encyclopedia/Oil_well) for explaining the structure and componenets of oil wells; they explained all the names of parts and how they work together. I constructed the Samson posts and walking beam out of wood, using a metal pole through the top of the Samson posts and through the middle of the walking beam to allow the structure to be stable and allow the walking beam to bob up and down. I then attached a circular laser cut piece of plastic to the motor to generate the rotational force necessary for the walking beam to take to move up and down. To connect the walking beam to the motor, I used a metal pole that went through the end of the walking beam and connected to the laser cut piece of plastic, which I used to serve the same purpose as the arm of the crank, with a laser cut hole on the outer edge that would move the metal pole up and down when that wheel spun. <br>
 <br>
-I found that the motor moved slower when I put the red wire into the 3.3 rather than 5v slot in the microcontroller and wanted the motor to move relatively slowly to mimc the motion of an oil well. Though the motor still moves a little too fast to be realistic, the basic up and down motion is there.
+I found that the motor moved slower when I put the red wire into the 3.3 rather than 5v slot in the microcontroller and wanted the motor to move relatively slowly to best mimic the motion of an oil well. Though the motor still moves a little too fast to be realistic, the basic up and down motion is there.
 
 <video width="480" height="240" controls>
   <source src="oil_drum.mov" type="video/mp4">
 </video>
 
-Code for inserting video came from: https://www.w3schools.com/html/html5_video.asp. <br>
-This would certainly bring up oil pretty quickly, perhaps if it had a few more tons of strength!
+Code for inserting video in html came from [this video](https://www.w3schools.com/html/html5_video.asp). This would certainly bring up oil pretty quickly, perhaps if it had a few more tons of strength!
 
 <h4> Getting Measurements on the Circuit </h4>
 
@@ -59,7 +60,9 @@ Here is my circuit on the breadboard:
     </div>
   </div>
 
-To measure the voltage of the cicuit, I used the multimeter and held the sensors to the resistor and found the voltage to be 3.29 volts. Using Ohm's law to calculate the current, I can use the formula ∆V = iR (thanks to https://www.google.com/search?q=ohm%27s+law&oq=ohm&aqs=chrome.0.69i59j69i57j0i433i512j0i131i433i512l2j0i433i512l2j0i10i131i433i512j0i131i433i512j0i512.5052j0j7&sourceid=chrome&ie=UTF-8 for explaining that R stands for resistance). We know that the voltage = 3.29 Volts and the resistance is 10,000 ohms (thanks to https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-resistor-color-code for helping me calculate the resistance of my resistor). So, we can divide 3.29 / 10,000 to get 3.29x10<sup> -4 </sup> Amperes.
+As you can see, the red wire connects to Power, or the 3.3 V slot in this case, in the microcontroller and the black wire connects to Ground. Beyond those two wires (on both sides), I put the wires of the motor, then another wire to connect the circuit across the Power Rail to the Terminal Strip. I used a resistor to connect the circuit across the Center Divider and another wire to connect the circuit from the Terminal Strip to the other Power Rail. Thank you to [this website](https://learn.adafruit.com/breadboards-for-beginners?view=all) for explaining the components of a breadboard: Power Rails, Terminal Strips, and Center Divider). That black wire connects the circuit from that other Power Rail to the microcontroller. Finally, the larger wire from the microcontroller to my computer supplies the power for the circuit.
+
+To measure the voltage of the cicuit, I used the multimeter and held the sensors to the resistor and found the voltage to be 3.29 volts. Using Ohm's law to calculate the current, I can use the formula ∆V = iR (thanks to [this link](https://www.google.com/search?q=ohm%27s+law&oq=ohm&aqs=chrome.0.69i59j69i57j0i433i512j0i131i433i512l2j0i433i512l2j0i10i131i433i512j0i131i433i512j0i512.5052j0j7&sourceid=chrome&ie=UTF-8) for explaining that R stands for resistance). We know that the voltage = 3.29 Volts and the resistance is 10,000 ohms (thanks to [this link](https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-resistor-color-code) for helping me calculate the resistance of my resistor). So, we can divide 3.29 / 10,000 to get 3.29x10<sup> -4 </sup> Amperes.
 
 
 
@@ -72,7 +75,12 @@ To measure the voltage of the cicuit, I used the multimeter and held the sensors
 
 <h4> Helpful Links </h4>
 
-Explains the structure of oil wells and how they work: https://www.youtube.com/watch?v=X0Dpd52pfp0
+These explain the structure of oil wells and how they work: https://www.youtube.com/watch?v=X0Dpd52pfp0 <br>
+https://energyeducation.ca/encyclopedia/Oil_well <br>
+This explains how to insert a video into html: https://www.w3schools.com/html/html5_video.asp <br>
+This helped me with learning the components of a breadboard: https://learn.adafruit.com/breadboards-for-beginners?view=all <br>
+This helped me learn the variables of the Ohm's Law equation: https://www.google.com/search?q=ohm%27s+law&oq=ohm&aqs=chrome.0.69i59j69i57j0i433i512j0i131i433i512l2j0i433i512l2j0i10i131i433i512j0i131i433i512j0i512.5052j0j7&sourceid=chrome&ie=UTF-8 <br>
+This helped me find the resistance of a particular resistor using that resistor's color code: https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-resistor-color-code
 
 <h4> Final Notes </h4>
 Again, I am incredibly sorry that I completed this project late (I finshed it on Tuesday night). I completely understand any pentalites that result from this and will try very hard to make sure I'm on time next week.

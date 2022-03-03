@@ -29,7 +29,7 @@
 
   <h2> Sleeve Prototype for Final Project </h2>
 
-Last updated: March 2, 2022
+Last updated: March 3, 2022
 
   <div class="row">
     <div class="col-sm-4">
@@ -44,7 +44,8 @@ For this project, I wanted to prototype a component needed for my final project.
 <h4> Getting Started </h4>
 I first designed the sleeve in Fusion 360, drawing a line and then using the circle-drawing piece to build the rounded end-piece, trimming away the unneeded parts to get the shape I wanted.
 One obstacle for this week was that I wanted the sleeve to be hollow and in a more oblong shape, rather than cylindrical. [This link](https://forums.autodesk.com/t5/fusion-360-design-validate/revolving-around-ellipse/td-p/8982216) helped me understand that the revolve feature revolves objects in a circle. Because I wanted the shape to be hollow in the inside, I decided to extrude the object and then make it hollow using the shell command. This was incredibly helpful! [This link](https://www.youtube.com/watch?v=NNPPcCx2Jqc&t=136s&ab_channel=TheFusionEssentials) helped me learn how to properly use the shell command. Then, I selected the end of the sleeve that I'd use to slide onto the wing of the machine and chose the thickness of the sketch (0.5 mm if I remember correctly) that I wanted. Now, the piece was hollow with an opening at the end. Additionally, once in 3d mode, I used the fillet command to round the edges of the sleeve, mimicking the rounded body of a spoon—what people often use to spread sauce! <br>
-Here is what it looked like in 3d mode in Fusion.
+<br>
+The dimensions for the sleeve are 80 mm x 40 mm, with a 40 mm diameter circle serving as the semi circle that rounded the end of the sleeve
 
 These are the pieces in Fusion 360 (both with the body removed in solid mode to see just the 2-D sketch (without the body in solid mode):
 
@@ -63,9 +64,9 @@ Here is what the sleeve looked like in 3-D mode.
     </div>
   </div>
 
-Then, I exported the proejct to Prusa to eventually be able to print it. Here is what the project looked like in prusa, with the regular mode on the top and individual layers mode on the bottom.
+<h4> Prusa </h4>
 
-<br>
+Then, I exported the proejct to Prusa to eventually be able to print it. Here is what the project looked like in prusa, with the regular mode on the top and individual layers mode on the bottom.
   <div class="row">
     <div class="col-sm-4">
       ![Prusa Regular Mode](./prusa_regular_mode.png)
@@ -76,7 +77,6 @@ Then, I exported the proejct to Prusa to eventually be able to print it. Here is
       ![Prusa Slicing Mode](./prusa_slicing_mode.png)
     </div>
   </div>
-
 
 One thing to note is the size of the filament. For efficiency, I selected the 0.30 DRAFT option for the print settings. This was helpful for lots of reasons: It gave me a print time of 59 minutes (as opposed to something like 6 hours if I were to use one of the smallest filaments!), this setting still gave me a very good prototype of this part, and also helped me to see that I'd like to go with a smaller filament for my final project to try to make the part of the sleeve that would be spreading the sauce around as smooth as possible, to mimic the surface of a spoon.
 
@@ -96,6 +96,28 @@ However, good thing that only took 10 minutes and used a small amount of filamen
     </div>
   </div>
 
+This is a quick video of the 3-D printer printing the sleeve. Though the size and color were different for the second try, of course, the actual 3-D printing process looked very similar. This first print took just 10 minutes given how small it was. The second print took only 59 minutes, still not bad at all.
+
+<video width="720" height="480" controls>
+  <source src="3d_printing_action.MOV" type="video/mp4">
+</video>
+
+<h4> 3-D Printing: Take Two </h4>
+
+Though the first try gave me some helpful information, after choosing a thicker outside of the sleeve, the sleeve was much more sturdy. Additionally, I think the larger body helped so that the filament didn't get too crowded. The larger sleeves (though I might try to change form blue to another color for the final project) turned out much better. Again, the sketches for these (in both 2-D and 3-D in Fusion 360 and 3-D in Prusa are located above in the Getting Started section).
+<br>
+  <div class="row">
+    <div class="col-sm-4">
+      ![printed sleeve](./printed_sleeve_1.png)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      ![printed sleeve 2](./printed_sleeve_2.png)
+    </div>
+  </div>
+
+
 <h4> Scanning Something </h4>
 For this week's scanning assignment, I decided to scan my winter hat. I used the Polycam app to scan my hat and it came out pretty well. I rotated around the hat, with the app taking several photos or "captures" to get a sense of the size of the object. Here is a picture of how the hat came out after the scans. Also, [here](https://poly.cam/capture/81BB841C-AFAA-41DA-9731-49C2DCA207D8) is the link to the poly.cam capture of the hat.
 [Here](https://poly.cam/) is the link to Polycam.
@@ -109,9 +131,13 @@ For this week's scanning assignment, I decided to scan my winter hat. I used the
 
 <h4> Helpful Links </h4>
 
+Helped me understand the nature of revolving objects in Fusion 360: https://forums.autodesk.com/t5/fusion-360-design-validate/revolving-around-ellipse/td-p/8982216
+
 Helped me better understand revolving in Fusion 360: https://forums.autodesk.com/t5/fusion-360-design-validate/revolving-around-ellipse/td-p/8982216
 
 Helped me with the shell function in Fusion 360: https://www.youtube.com/watch?v=NNPPcCx2Jqc&t=136s&ab_channel=TheFusionEssentials
+
+Link to Polycam: https://poly.cam/
 
 <h4> Final Notes </h4>
 Thank you so much to the teaching staff for their help with this project!
