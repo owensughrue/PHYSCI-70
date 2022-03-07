@@ -25,11 +25,11 @@
 
 <div class="container-fluid"> 
 
-  <h1> Week 5: 3D Design and Printing </h1>
+  <h1> Week 6: Electronic Input Devices </h1>
 
-  <h2> Sleeve Prototype for Final Project </h2>
+  <h2> Measuring Capacitance and Making a Microphone </h2>
 
-Last updated: March 3, 2022
+Last updated: March 6, 2022
 
   <div class="row">
     <div class="col-sm-4">
@@ -37,9 +37,170 @@ Last updated: March 3, 2022
     </div>
   </div>
 
-<h4> Reason for Doing this Project </h4>
+<h4> Part I: Measuring Capacitance Between Copper Plates </h4>
 
-For this project, I wanted to prototype a component needed for my final project. For my final project, in which I'm planning to build a device that can spread pizza evenly using a central motor and a wing that spreads the pizza sauce around, I'd like for the motor and the wing to remain clean the whole time so that sauce doesn't get into those parts and potentially damage the motor. One way to ensure these stay clean is to fit a sleeve around both the central motor and the wing. This week, I designed a mini version of the sleeve for the wing.
+The first part of this week's project asked us to "make a capacitive sensor to measure a physical quantity with your microcontroller." Given what we learned about capacitance during this week's classes and readings, we learned how to use a breadboard, copper plates, alligator wires, and Arduino to measure the capacitance between two copper plates. Thank you very much to Gabby Perry and Kassia Love for helping me with this aspect of the week's project. <br>
+<br>
+
+<h4> Initial Trial </h4>
+
+It might be best to show the picture of the circuit and then explain below. Here is a picture of the circuit on the breadboard and connected to the microcontroller. Thank you to [this website](https://www.w3schools.com/tags/att_img_width.asp) for the code for inserting this image and helping me get the desired dimensions for this image. <br>
+
+<img src="copper_plates_circuit.png"
+alt="Copper Plates Circuit"
+width="720" height="480">
+
+What I first tried when setting up this circuit was connecting the a wire from the 5V pin in the microcontroller to one of the Power Rails of the breadboard and a GND pin in the microcontroller to the other Power Rail of the breadboard on the other side. Then, I connected a resistor from the Power Rail shared with power across to a terminal strip. I then attached a wire just beyond this resistor along the same terminal strip as the resistor, with one end down into the breadboard and the other well above with one end of the alligator wires attached. (Attached to the other end of those alligator wires was the copper plate.) Then, I connected a wire from the A3 pin of the microcontroller to the same terminal strip as the resistor and the wire attached to the alligator strips (before the Center Divider of the breadboard). <br>
+
+Then, I attached another resistor from that side of the breadboard all the way across the Center Divider and the terminal strip of the other side to the Power Rail on the opposite side, on the same vertical strip as the wire connected to the GND pin on the microcontroller. Thank you to [this website](https://learn.adafruit.com/breadboards-for-beginners?view=all) for explaining the components of a breadboard: Power Rails, Terminal Strips, and Center Divider. <br>
+
+Additionally, here is the Arduino code for this program. I mention it in a comment, but thank you very much to Robert Hart for supplying this code. I used the code from [this website](https://roberthart56.github.io/SCFAB/SC_lab/Sensors/tx_rx_sensors/rx_tx03.txt) for this part of the assignment.
+
+<code>
+// Thank you to https://roberthart56.github.io/SCFAB/SC_lab/Sensors/tx_rx_sensors/rx_tx03.txt <br>
+// The above site supplied the code to me, and originally came from Robert Hart—thank you to him! <br>
+// Also, thank you very much to Gabby Perry and Kassia Love for explaining this code and this circuit to me! <br>
+//tx_rx03  Robert Hart Mar 2019. <br>
+//  Program to use transmit-receive across space between two conductors. <br>
+//  One conductor attached to digital pin, another to analog pin. <br>
+//  This program has a function "tx_rx() which returns the value in a long integer. <br>
+//  Optionally, two resistors (1 MOhm or greater) can be placed between 5V and GND, with
+//  the signal connected between them so that the steady-state voltage is 2.5 Volts. <br>
+//  Signal varies with electric field coupling between conductors, and can
+//  be used to measure many things related to position, overlap, and intervening material
+//  between the two conductors. <br> 
+<br>
+long result;   //variable for the result of the tx_rx measurement. <br>
+int analog_pin = A3; <br>
+int tx_pin = A1; <br>
+void setup() { <br>
+pinMode(tx_pin,OUTPUT);      //Pin 4 provides the voltage step <br>
+Serial.begin(9600); <br>
+} <br>
+<br>
+long tx_rx(){         //Function to execute rx_tx algorithm and return a value <br>
+                      //that depends on coupling of two electrodes. <br>
+                      //Value returned is a long integer. <br>
+  int read_high; <br>
+  int read_low; <br>
+  int diff; <br>
+  long int sum; <br>
+  int N_samples = 100;    //Number of samples to take.  Larger number slows it down, but reduces scatter. <br>
+<br>
+  sum = 0; <br>
+<br>
+  for (int i = 0; i < N_samples; i++){ <br>
+   digitalWrite(tx_pin,HIGH);              //Step the voltage high on conductor 1. <br>
+   read_high = analogRead(analog_pin);        //Measure response of conductor 2. <br>
+   delayMicroseconds(100);            //Delay to reach steady state. <br>
+   digitalWrite(tx_pin,LOW);               //Step the voltage to zero on conductor 1. <br>
+   read_low = analogRead(analog_pin);         //Measure response of conductor 2. <br>
+   diff = read_high - read_low;       //desired answer is the difference between high and low. <br>
+ sum += diff;  //Sums up N_samples of these measurements. <br>
+ } <br>
+  return sum; <br>
+}     //End of tx_rx function. <br>
+<br>
+<br>
+void loop() { <br>
+<br>
+result = tx_rx(); <br>
+Serial.println(result); <br>
+//delay(100); <br>
+<br>
+}</code>
+
+Here is a video of using this circuit and the serial plotter in Arduino Notice the peaks in the graph when moving the copper plates closer together; the capacitance is highest when the plates are closest together and touching over the most area: <br>
+
+<video width="720" height="480" controls>
+  <source src="capacitance_copper_plates_breadboard_new.mov" type="video/mp4">
+</video>
+
+<h4> A More Efficient Approach </h4>
+
+So, there were a lot of positives with this circuit—most notably, it worked! However, Gabby explained to me several of the components of the circuit and I went through the code with both Gabby and Kassia during their office hours. When discussing the code with Kassia, we were talking about the <code> analog_pin =A3</code> variable and the <code> tx_pin = A1</code> variable. So, in fiddling with the circuit a bit, Kassia helped me see that the <code> analog_pin =A3</code> was instructing the Arduino to read the information from the A3 pin and the <code> tx_pin = A1</code> was providing something (another copper plate) with which the <code>A3</code> could read the capacitance between the two plates and send that information to the serial plotter in Arduino. <br>
+So with this information, we experimented with directly connecting one of the ends of the alligator wires to the A1 pin in the microcontroller and another end of another of the alligator wires into the A3 pin of the microcontroller. It turns out that this worked as well—no breadboard needed!
+
+Here is an image of the breadboard-less setup.
+
+<img src="copper_plates_setup.png"
+alt="Copper Plates Circuit"
+width="720" height="480">
+
+Additionally, here is a video of the serial plot of the capacitance between the two copper plates on the Arduino (You can notice at the end when I hold the plates against each other such that they are touching together across a lot of surface area; capacitance increases the closer the plates are together and the more surface area both plates have to touch each other):
+
+<video width="720" height="480" controls>
+  <source src="breadboardless_capacitance_between_copper_plates.mov" type="video/mp4">
+</video>
+
+<!--- See if capacitancies are different in the two cases --->
+
+
+
+
+
+
+
+
+
+
+<h4> Helpful Links </h4>
+
+Helped me with the components of a breadboard: https://learn.adafruit.com/breadboards-for-beginners?view=all
+
+Helped me insert images into this site and get the dimensions I wanted for those images: https://www.w3schools.com/tags/att_img_width.asp
+
+<h4> Final Notes </h4>
+Thank you so much to the teaching staff for their help with this project!
+
+
+</xmp>
+</body>
+
+<script src="https://strapdownjs.com/v/0.2/strapdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---
+
+
 
 <h4> Getting Started </h4>
 I first designed the sleeve in Fusion 360, drawing a line and then using the circle-drawing piece to build the rounded end-piece, trimming away the unneeded parts to get the shape I wanted.
@@ -131,7 +292,7 @@ For this week's scanning assignment, I decided to scan my winter hat. I used the
 
 <h4> Helpful Links </h4>
 
-Helped me understand the nature of revolving objects in Fusion 360: https://forums.autodesk.com/t5/fusion-360-design-validate/revolving-around-ellipse/td-p/8982216
+Provided me with the language for this week's assignment: https://nathanmelenbrink.github.io/ps70/06_input/index.html
 
 Helped me better understand revolving in Fusion 360: https://forums.autodesk.com/t5/fusion-360-design-validate/revolving-around-ellipse/td-p/8982216
 
@@ -152,3 +313,5 @@ Thank you so much to the teaching staff for their help with this project!
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
 
 </html>
+
+--->
