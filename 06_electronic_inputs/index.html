@@ -137,17 +137,82 @@ Additionally, here is a video of the serial plot of the capacitance between the 
 
 <h4> Part II: Setting up a Microphone with Arduino </h4>
 
+Thank you to Nathan Melenbrink and [this website](https://nathanmelenbrink.github.io/ps70/06_input/mic/index.html) for guiding me through this assignment. This website gave me the foundational ideas and steps for completeing this part of this week's project. <br>
 
+To set up the microphone, the website explains that you can connect a wire from the GND pin in the microcontroller to the GND pin in the microphone, a wire from the 5V pin in the microcontroller to the Vin pin in the microphone, and a wire from an analogue reading pin in the microcontroller (A0) to the DC pin in the microphone. To do this, we can connect the other end of the pins connected to the microcontroller into a breadboard and connect the microphone to the breadboard, as seen below. I found that the problem with this setup was that my microphone wasn't connected well enough to the pins and the serial plotter didn't work like I'd hoped. <br>
+Here is the setup of what everything looked like. You can notice the microphone leaning back because the pins weren't soddered on.
 
+<img src="microphone_breadboard_setup.png"
+alt="Microphone Breadboard Setup"
+width="720" height="480">
 
+So, given that the results weren't working as well as I'd hoped with this setup, Gabby helped me to connect the wires and the microphone directly. Gabby showed me that we could still connect wires from the microcontroller to the breadboard, but rather than have the microphone connected to the breadboard as well, we could connect two wires on the same Power Rails as the two wires connected to GND and 5V in the microcontroller to the pins in the microphone, as shown below.
 
+<img src="microphone_bent_wires_breadboard.png"
+alt="Microphone Breadboard Setup with Wires Connecting Directly to Microphone"
+width="720" height="480">
 
+When reconstructing this setup to make the circuit to capture on video, I tried to recreate what I'd seen Gabby illustrate, but, this time, connected the wires directly from the microcontroller to the microphone. A picture of this new setup (not connected to a power source (my computer)) is below.
+
+<img src="microphone_breadboardless_setup.png"
+alt="Microphone Breadboard-Less Setup"
+width="720" height="480">
+
+This new setup worked just fine! It makes total sense, thinking about how rather than connecting the wires from the microcontroller to the breaboard to the microphone, we can connect the wires directly from the microcontroller to the microphone! Very similar to what Kassia explained in helping me with the circuit to measure the capacitance between the copper plates, connecting wires directly from the microcontroller to what we're measuring yields good results. <br>
+In this setup, we can connect a wire from the GND pin of the microcontroller (directly) to the GND pin of the microphone, a wire from the 5V pin of the microcontroller (directly) to the Vin pin of the microphone, and a wire from the A0 pin (directly) to the DC pin of the microphone. I found this was just a different way to set up the circuit and seemed to work well.
+Here is a video of the serial plotter in Arduino reading information from the microphone.
+
+<video width="720" height="480" controls>
+  <source src="microphone_no_breadboard_video.mov" type="video/mp4">
+</video>
+
+The code I used came from [this website](https://nathanmelenbrink.github.io/ps70/06_input/mic/index.html) and is below:
+
+<code>
+      const int sampleWindow = 50; // Sample window width in mS (50 mS = 20Hz) <br>
+    unsigned int sample; <br>
+<br>
+    void setup() <br>
+    { <br>
+       Serial.begin(9600); <br>
+    } <br>
+    <br>
+    void loop() <br>
+    { <br>
+       unsigned long startMillis= millis();  // Start of sample window<br>
+       unsigned int peakToPeak = 0;   // peak-to-peak level<br>
+<br>
+       unsigned int signalMax = 0;<br>
+       unsigned int signalMin = 1024;<br>
+<br>
+       // collect data for 50 mS<br>
+       while (millis() - startMillis < sampleWindow)<br>
+       {<br>
+          sample = analogRead(0);   //reading DC pin from pin A0<br>
+          if (sample < 1024)  // toss out spurious readings<br>
+          {<br>
+             if (sample > signalMax)<br>
+             {<br>
+                signalMax = sample;  // save just the max levels<br>
+             }<br>
+             else if (sample < signalMin)<br>
+             {<br>
+                signalMin = sample;  // save just the min levels<br>
+             } <br>
+          } <br>
+       } <br>
+       peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude<br>
+<br>
+       Serial.println(peakToPeak);<br>
+    }</code>
 
 <h4> Helpful Links </h4>
 
 Helped me with the components of a breadboard: https://learn.adafruit.com/breadboards-for-beginners?view=all
 
 Helped me insert images into this site and get the dimensions I wanted for those images: https://www.w3schools.com/tags/att_img_width.asp
+
+Helped me building a microphone for Part II of this assignment: https://nathanmelenbrink.github.io/ps70/06_input/mic/index.html
 
 <h4> Final Notes </h4>
 Thank you so much to the teaching staff for their help with this project!
