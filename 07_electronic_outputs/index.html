@@ -27,11 +27,11 @@
 
   <h1> Week 7: Electronic Output Devices </h1>
 
-Last updated: March 22, 2022
+Last updated: March 26, 2022 at 10:22 PM
 
 
 
-<h4> Part I: Controlling the Brightness of an LED with a Potentiometer </h4>
+<h4> Parts 1 and 2: Controlling the Brightness of an LED with a Potentiometer </h4>
 
 For the first part of our assignment this week, our goal was to use an input device and an output device we hadn't used before. For our last project, I used a microphone to measure sound and we played around with buzzers during class. Though we used LEDs earlier in the class, I hadn't used it for a project yet and wanted to try to use one for this week's project. I thought it was really neat using a potentiometer to control the speed of a motor a few weeks ago and wanted to try to control the brightness of an LED using a potentiometer for this week's project. <br>
 <br>
@@ -70,7 +70,8 @@ void loop()<br>
 And here is the setup they give for their breadboard: <br>
 <img src="arduino_example_setup.png"
 alt="Arduino Example Setup"
-width="720" height="480">
+width="720" height="480"> <br>
+[Link to page where this picture comes from](https://create.arduino.cc/projecthub/wieselly/arduino-tutorial-using-potentiometer-control-led-light-0dbbd1?ref=part&ref_id=11332&offset=25)
 
 Their example worked very well, and here is a video of me using the potentiometer controlling the brightness of the LED. <br>
 <video width="720" height="480" controls>
@@ -135,6 +136,50 @@ In the code, you can notice that I used pin AO for the <code> readValue</code> v
 </video>
 
 One thing to notice is that the brightness of the LED on the left is controlled by the potentiometer, but the LED on the right seems to simply go on and off once the potentiometer reaches a certain threshold. I tried switching the resistors for the 2 LEDs (they do not have the same resistance), but got the same result. I had hoped that the code would allow the brightness of the right LED to be controlled the same way as the brightness of the left LED, but at least the potentiometer is controlling that second LED even if not controlling the brightness of it. My guess is there's a change in the code I could make that would allow me to control the brightness of the second LED in the same way that I can for the first LED. <br>
+
+<h4> Part 3: Using an Oscilloscope to Find the Time Domain of my Output Device </h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4> Part 4: Designing Something for the CNC Router (ShopBot) </h4>
+*Note: I wrote this portion of the website on March 26, after the March 22 due date for this assignment.* <br>
+
+For this part of the assignment, I wanted to design a piece of a salt and pepper box I've been wanting to make for years for my family. The one that we currently use doesn't really fit our salt and pepper containers, so I'd like to make one that fits well. I've always found woodworking really cool, but have done it very little. One of my goals for the semester is to make a salt and pepper box for my family to use. <br>
+
+Given that, I decided to design something in Fusion to cut on the ShopBot. I study French, and my family is French Canadian, so I'd like to make the box say "Sel et Poivre" (which means "salt and pepper" in French!). I largely followed [this](https://www.youtube.com/watch?v=uURKCrErYSM&ab_channel=NEWTechCreative) YouTube tutorial for the first try for my sketch, but ran into some problems, likely because I wasn't following every step he used. I was running into problems when embossing the text so that it looked nice in Fusion360, but wasn't showing up how I wanted when importing into Aspire. <br>
+
+Given that I completed this part of the assignment late, my final version of my Fusion drawing was different from the first version I made. However, here is my final version of my Fusion 360 file (that I eneded up cutting with the ShopBot in Week 8). You can note the text showing up as outlines (not solid) as a result of exploding the text. <br>
+
+<img src="./fusion_360_sel_et_poivre_example.png"
+alt="Sel et Poirve Box in Fusion360"
+width="720" height="480"> <br>
+
+Originally, I chose a font that was too small for the ShopBot to cut so that the text would show up (at least with the 1/8 inch bit we were using), so I expanded the board and enlarged the text so the CNC would be able to make proper cuts on the letters so they'd be ligible. See [Week 8](.08_cnc_and_molding/index.html) for how the sketch came out in the ShopBot!
+
+
+
+
+
+
+
+
 
 
 
