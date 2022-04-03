@@ -136,25 +136,47 @@ In the code, you can notice that I used pin AO for the <code> readValue</code> v
 One thing to notice is that the brightness of the LED on the left is controlled by the potentiometer, but the LED on the right seems to simply go on and off once the potentiometer reaches a certain threshold. I tried switching the resistors for the 2 LEDs (they do not have the same resistance), but got the same result. I had hoped that the code would allow the brightness of the right LED to be controlled the same way as the brightness of the left LED, but at least the potentiometer is controlling that second LED even if not controlling the brightness of it. My guess is there's a change in the code I could make that would allow me to control the brightness of the second LED in the same way that I can for the first LED. <br>
 
 <h4> Part 3: Using an Oscilloscope to Find the Time Domain of my Output Device </h4>
+*Note: I wrote this portion of the website on April 3, after the March 22 due date for this assignment.* <br>
 
+For this part of the assignment, Chris helped me use the Oscilloscope with a simple Arduino code example. Additionally, this involved plugging in an LED to the breadboard and connecting wires from the microcontroller to the breadboard to complete the circuit.
 
+Here is the Arduino Code:
 
+<code>
+void setup() { <br>
+  pinMode(3, OUTPUT); <br>
+  // put your setup code here, to run once: <br>
+ <br>
+} <br>
+ <br>
+void loop() { <br>
+  // put your main code here, to run repeatedly: <br>
+  digitalWrite(3, HIGH); <br>
+  digitalWrite(3, LOW); <br>
+ <br>
+}</code> <br>
+<br>
 
+The <code>pinMode(3, OUTPUT)</code> code sets pin 3 as the output, meaning that pin will do what the Arduino code tells it to do. Then, the <code>digitalWrite(3, HIGH);</code> and <code>digitalWrite(3, LOW);</code> loops turn the LED on and off really quickly. Chris explained that, while it looks like the LED is dimmer, the Arduino code is actually turning the LED on and off really fast. Here is a photo of the breadboard setup:
 
+<h5> Oscilloscope Reading </h5>
 
+When connecting the Oscilloscope to the circuit, the 'scope started to display the time intervals of the circuit. Here is a photo of the graph that the 'scope displayed. <br>
 
+<img src="./scope_reading.png"
+alt="Sel et Poirve Box in Fusion360"
+width="720" height="480"> <br>
 
+Here is a photo of the setup of this circuit on the breadboard:
 
+<!--
+<img src="./scope_reading.png"
+alt="Sel et Poirve Box in Fusion360"
+width="720" height="480"> <br>
+NEED TO CHANGE THIS!!!
+-->
 
-
-
-
-
-
-
-
-
-
+Chris explained that the Z = 4.00µs means that between each vertical bar in the graph is 4 microseconds, or 4 millionths of a second! The reading in the bottom right of the 'scope, 112.141kHz means that the LED is turning on and off 112,141 times per second, which is why the LED simply looks dim to us.
 
 <h4> Part 4: Designing Something for the CNC Router (ShopBot) </h4>
 *Note: I wrote this portion of the website on March 26, after the March 22 due date for this assignment.* <br>
@@ -190,9 +212,12 @@ This website helped me find the text feature in Fusion360: https://all3dp.com/2/
 
 This was the YouTube Tutorial I used heavily for my ShopBot object: https://www.youtube.com/watch?v=uURKCrErYSM&ab_channel=NEWTechCreative <br>
 
+Helped me understand Hertz: https://en.wikipedia.org/wiki/Hertz <br>
+
+Helped me with learning about oscilloscopes: https://learn.sparkfun.com/tutorials/how-to-use-an-oscilloscope/all <br>
+
 <h4> Final Notes </h4>
 Thank you so much to the teaching staff for their help with this project! <br>
-Also, thank you to Nathan for helping me sort out issues I was having with iCloud and GitHub! It is so much better now!
 
 
 </xmp>
