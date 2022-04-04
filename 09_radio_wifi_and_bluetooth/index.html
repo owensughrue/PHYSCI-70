@@ -29,7 +29,84 @@
 
 Last updated: April 4, 2022
 
-<h4>  </h4>
+<h4> Cotrolling an LED with my iPad using Bluetooth Low Energy (BLE) </h4>
+
+For this week's project, I sought to find a way to turn an LED on and off using an app on my iPad. We learned about the benefits of BLE during class—for example, BLE devices use far less energy than regular Bluetooth and have a longer battery life.
+
+I used the BLE_Write Example in Arduino to get started. Here is the code for the example (Note: for the <code> &#35; include</code> lines, there are <>'s around <code> BLEDevice.h</code>, <code> BLEUtils.h</code>, and <code> BLEServer.h</code>:
+
+<code>
+<br>
+/* <br>
+    Based on Neil Kolban example for IDF: https://github.com/nkolban/esp32-snippets/blob/master/cpp_utils/tests/BLE%20Tests/SampleWrite.cpp
+    Ported to Arduino ESP32 by Evandro Copercini <br>
+*/ <br>
+<br>
+<!--
+&#35; include <BLEDevice.h> <br>
+&#35; include <BLEUtils.h> <br>
+&#35; include <BLEServer.h> <br>
+-->
+&#35; include BLEDevice.h <br>
+&#35; include BLEUtils.h <br>
+&#35; include BLEServer.h <br>
+<br>
+// See the following for generating UUIDs: <br>
+// https://www.uuidgenerator.net/ <br>
+<br>
+&#35; define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b" <br>
+&#35; define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8" <br>
+<br>
+<br>
+class MyCallbacks: public BLECharacteristicCallbacks { <br>
+    void onWrite(BLECharacteristic *pCharacteristic) { <br>
+      std::string value = pCharacteristic->getValue(); <br>
+<br>
+      if (value.length() > 0) { <br>
+        Serial.println("*********"); <br>
+        Serial.print("New value: "); <br>
+        for (int i = 0; i < value.length(); i++) <br>
+          Serial.print(value[i]); <br>
+<br>
+        Serial.println(); <br>
+        Serial.println("*********"); <br>
+      } <br>
+    } <br>
+}; <br>
+<br>
+void setup() { <br>
+  Serial.begin(115200); <br>
+<br>
+  Serial.println("1- Download and install an BLE scanner app in your phone"); <br>
+  Serial.println("2- Scan for BLE devices in the app"); <br>
+  Serial.println("3- Connect to MyESP32"); <br>
+  Serial.println("4- Go to CUSTOM CHARACTERISTIC in CUSTOM SERVICE and write something"); <br>
+  Serial.println("5- See the magic =)"); <br>
+<br>
+  BLEDevice::init("Owen's ESP32"); <br>
+  BLEServer *pServer = BLEDevice::createServer(); <br>
+<br>
+  BLEService *pService = pServer->createService(SERVICE_UUID); <br>
+<br>
+  BLECharacteristic *pCharacteristic = pService->createCharacteristic( <br>
+                                         CHARACTERISTIC_UUID, <br>
+                                         BLECharacteristic::PROPERTY_READ | <br>
+                                         BLECharacteristic::PROPERTY_WRITE
+                                       ); <br>
+<br>
+  pCharacteristic->setCallbacks(new MyCallbacks()); <br>
+<br>
+  pCharacteristic->setValue("Hello World"); <br>
+  pService->start(); <br>
+<br>
+  BLEAdvertising *pAdvertising = pServer->getAdvertising(); <br>
+  pAdvertising->start(); <br>
+} <br>
+<br>
+void loop() { <br>
+  // put your main code here, to run repeatedly: <br>
+  delay(2000); <br>
+} </code>
 
 <!--
 <video width="720" height="480" controls>
@@ -44,6 +121,7 @@ width="720" height="480">
 
 <h4> Helpful Links </h4>
 
+Gave me the code for "#" in html (&#35;): https://www.rapidtables.com/web/html/html-codes.html
 
 <h4> Final Notes </h4>
 Thank you so much to the teaching staff for their help with this project! <br>
