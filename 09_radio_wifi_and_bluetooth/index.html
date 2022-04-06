@@ -33,7 +33,7 @@ Last updated: April 4, 2022
 
 For this week's project, I sought to find a way to turn an LED on and off using an app on my iPad. We learned about the benefits of BLE during class—for example, BLE devices use far less energy than regular Bluetooth and have a longer battery life.
 
-I used the BLE_Write Example in Arduino to get started. Here is the code for the example (Note: for the <code> &#35; include</code> lines, there are <>'s around <code> BLEDevice.h</code>, <code> BLEUtils.h</code>, and <code> BLEServer.h</code>:
+I used the BLE_Write Example in Arduino to get started. Here is the code for the example (Note: for the <code> &#35; include</code> lines, there are <>'s around <code> BLEDevice.h</code>, <code> BLEUtils.h</code>, and <code> BLEServer.h</code>. The website wouldn't show those properly on the website; I assume that's because the html thought those were a different command.):
 
 <code>
 <br>
@@ -106,7 +106,25 @@ void setup() { <br>
 void loop() { <br>
   // put your main code here, to run repeatedly: <br>
   delay(2000); <br>
-} </code>
+} </code> <br>
+
+So, here is my understanding of this piece of code: <br>
+<code>
+        if (value.length() > 0) { <br>
+        Serial.println("*********"); <br>
+        Serial.print("New value: "); <br>
+        for (int i = 0; i < value.length(); i++) <br>
+          Serial.print(value[i]); <br>
+<br>
+        Serial.println(); <br>
+        Serial.println("*********");</code> <br>
+
+The <code> if (value.length() > 0) {</code> says that if the serial monitor receives a value from the BLE connected device longer than 0, do the following: <br> Print the 9 asterisks, then "New value:", then that new value, then another 9 asterisks. I don't understand all of the code within that piece, but, essentially, that's what I presume must be going on given what shows up on the Serial Monitor. Here is an image from the serial monitor demonstrating what shows up. <br>
+
+<img src="serial_monitor_output.png"
+alt="Serial Monitor Output"
+width="360" height="240">
+
 
 <!--
 <video width="720" height="480" controls>

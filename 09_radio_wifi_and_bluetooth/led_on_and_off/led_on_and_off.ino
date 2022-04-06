@@ -13,6 +13,8 @@
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
+int ledPin = 5;
+int valuePin = 0;
 
 class MyCallbacks: public BLECharacteristicCallbacks {
     void onWrite(BLECharacteristic *pCharacteristic) {
@@ -21,17 +23,23 @@ class MyCallbacks: public BLECharacteristicCallbacks {
       if (value.length() > 0) {
         Serial.println("*********");
         Serial.print("New value: ");
-        for (int i = 0; i < value.length(); i++)
+        for (int i = 0; i < value.length(); i++) {
           Serial.print(value[i]);
+          valuePin = value[i];
+        }
+          
+          
 
         Serial.println();
         Serial.println("*********");
-      }
-    }
+        }
+  }
 };
+
 
 void setup() {
   Serial.begin(115200);
+  pinMode(ledPin, OUTPUT);
 
   Serial.println("1- Download and install an BLE scanner app in your phone");
   Serial.println("2- Scan for BLE devices in the app");
@@ -60,6 +68,14 @@ void setup() {
 }
 
 void loop() {
+  if (valuePin == 1) {
+          digitalWrite(ledPin, HIGH);
+          }
+  else {
+    digitalWrite(ledPin, LOW);
+    }
+      
+   // Declare the LED as an output
   // put your main code here, to run repeatedly:
   delay(2000);
 }
