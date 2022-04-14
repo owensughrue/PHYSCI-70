@@ -27,7 +27,135 @@
 
   <h1> Week 10: Machine Building and End Effectors </h1>
 
-Last updated: April 11, 2022
+  <h2> Controlling/Homing a Stepper Motor Using an LED and an LED sensor </h2>
+
+Last updated: April 13, 2022
+
+For this week's project, I was hoping to work with LEDs given that I had some trouble working with them last week. My main goal was to use the LEDs to home my stepper motor using LEDs. <br>
+
+A lot of what I found online for homing a stepper motor advocated for using limit switches. This seemed like a pretty decent method to home stepper motors, but I wanted to use LEDs if possible. I enjoyed working with them for the [Week 7 project](./07_electronic_outputs/index.html) and wanted to get a better sense of LEDs. <br>
+
+I would like to share my immense gratitude to Chris for his help with this project. His code and wiring on Tuesday 4/12 gave the results we'd discussed for that week's project. Thank you, Chris!!! <br>
+
+At a conceptual level, the goal of this project was to have the stepper motor run normally while an LED shone and the LED sensor received the signals from the LED. When something came between the LED and the LED sensor, the goal was to have that be the way to stop the motor. <br>
+
+<h4> Here are the materials for this week's project: </h4>
+- Breadboard <br>
+- Microcontroller <br>
+- White light LED <br>
+- LED sensor <br>
+- Stepper motor <br>
+- Motor driver <br>
+- 9V power unit <br>
+<br>
+
+Here are a few pictures of the breadboard setup for the project: <br>
+
+This picture shows the overall circuit, with the microcontroller, the breadboard for the motor driver, the connection from the power supply to the circuit, the breadboard for the led and led sensor, and the stepper motor. <br>
+
+<img src="circuit_overview.png"
+alt="circuit_overview"
+width="720" height="480"> <br>
+
+This picture shows the breadboard for the motor driver. Thanks to [this page](https://nathanmelenbrink.github.io/ps70/12_machine/steppers.html) for helping with the setup. I think the motor driver used is the A4988 driver, so the pins don't connect exactly as they do in the diagram from that page, but they're very close. Thank you to Chris and Gabby for their help with connecting pins correctly. <br>
+
+<img src="motor_driver.png"
+alt="motor_driver"
+width="720" height="480"> <br>
+
+This picture shows the breadboard for the LED and the LED sensor. You can see that they are bent so that they point toward each other. This ensures that the LED sensor picks up good readings from the LED (when unobstructed). <br>
+
+<img src="led_and_led_sensor.png"
+alt="led_and_led_sensor"
+width="720" height="480"> <br>
+
+Here's another photo of the led and led sensor breadboard from another angle. <br>
+
+<img src="led_and_led_sensor_2.png"
+alt="led_and_led_sensor_2"
+width="720" height="480"> <br>
+
+One of the neat things that Chris explained was that the microcontroller can connect to two breadboards and control both the motor through the readings that the Arduino displayed from the LED sensor (see code in the Code section).
+
+<!--
+<img src="breadboard_setup_wk_10_4.png"
+alt="Arduino Example Setup"
+width="720" height="480"> <br>
+-->
+
+<!-- EXPLANATION OF THE BREADBOARD -->
+
+<h4> Logic of the Breadboard </h4>
+
+Written out, the breadboard setup for the LEDs is as follows: <br>
+
+The red wire pin connected to GND in the microcontroller connects to the breadboard on the side closer to the LED sensor. A 10k resistor connects that pin to the cathode of the LED sensor. The green wire connects the anode of the LED sensor to the power rail in which the red pin connected to power (5V) in the microcontroller. The long red wire connects power from the side of the breadboard in which power is coming in across to the other half. With the LED, a 100 Ohm resistor connects the anode of the LED to power along that same power rails as the incoming power from the microcontroller and the red wire connecting power from one side of the breadboard to the other. Additionally, the orange wire conencts the cathode of the LED to the GND connection on the other side of the breadboard along that other power rail with the incoming GND wire from the microcontroller. My apologies, the green wire at the bottom corner of the breadboard is not connected to anything and isn't necessary. <br>
+
+Here's the logic for the breadboard with the motor driver: <br>
+
+The red wire at the bottom of the breadboard with the LEDs connects power from that breadboard (power from the microcontroller, not the power supply) to the motor driver on the other breadboard. 
+
+<!-- 
+  MENTION HOW POWER AND GROUND CONNECT FROM THE POWER SUPPLY TO THE MOTOR DRIVER AND IF POSSIBLE TRY TO IDENTIFY WHAT KIND OF MOTOR DRIVER THIS IS AND NAME ALL OF THE CONNECTIONS
+-->
+
+<h4> Code </h4>
+
+Here is the Arduino code for this project ("AccelStepper.h" is surrounded by "<" and ">" in the actual code and thank you to Chris for the code!):
+
+<code>
+&#35; include AccelStepper.h
+<br>
+const int stepPin = 13;   // blue<br>
+const int dirPin = 12;   // orange<br>
+<br>
+// Define a stepper and the pins it will use<br>
+AccelStepper stepper(1, stepPin, dirPin);  // initialize accelstepper for a two wire board<br>
+<br>
+int pos = 0;<br>
+<br>
+void setup() {<br>
+  pinMode(A0, INPUT);<br>
+  stepper.setMaxSpeed(100);<br>
+  stepper.setAcceleration(300);<br>
+  home_motor();<br>
+}<br>
+<br>
+void loop() {<br>
+  while (analogRead(A0) > 900) {<br>
+    pos += 1;<br>
+    stepper.run();<br>
+    stepper.moveTo(pos);<br>
+  }<br>
+}</code> <br>
+
+Here's my understanding of the code and how this part of the project works. The first two lines communicate from the Arduino to the microcontroller to the motor driver to the stepper motor that pin 12 and pin 13 on the microcontroller are in charge of step and direction. As you can see on the diagram, the black wire connects from pin 12 on the microcontroller to the farthest right pin on the motor driver, the direction pin. Similarly, the blue wire connects from pin 13 on the microcontroller to the second most right pin on the motor driver, the step pin. <br>
+
+Next, the <code> AccelStepper stepper(1, stepPin, dirPin);</code> line explains to the stepper motor that the pins it should pay attention to for step and direction are the <code>stepPin</code> and <code>dirPin</code> pins. We start the motor at position 0 and then get into the setup. <br>
+
+The <code>pinMode(A0, INPUT);</code> line explains that pin A0 is an input, meaning that it will read something given to it (rather than an output which would do something we tell it to do.) This has to do with our LED sensor. You can see in the diagram that the green wire connects from pin AO on the microcontroller to the breadboard, to the green wire on the same power rail (on the same half of the breadboard! Chris explained that the breadboard we used was divided in half so it was important to link wires either across that barrier or arrange them such that the connection didn't stop there) and, finally, to the LED sensor. You can see the sensor pointing to the LED, ensuring that the sensor could get a good reading from the LED when the LED was on. <br>
+
+Then, the <code>stepper.setMaxSpeed(100);</code> and <code>stepper.setAcceleration(300);</code> lines set the max speed to 100 (I'm not sure of the units—I'd guess maybe RPM?) and the acceleration to 300 (same here—maybe RPM/s? -> I think it's m/s<sup>2</sup> -> thank you to [this website](https://calculator.academy/rpm-to-acceleration-calculator/#:~:text=The%20most%20common%20units%20for,are%20m%2Fs%5E2) for explaining the units!) Lastly, the <code>home_motor();</code> line sets up the function to home the motor. <br>
+
+Then, we get into the loop. I see this as the heart of the code. These are the key lines: <br>
+<code>
+  while (analogRead(A0) > 900) {<br>
+    pos += 1;<br>
+    stepper.run();<br>
+    stepper.moveTo(pos);</code> <br>
+These lines are saying to the stepper motor that while the A0 pin is getting a reading of more than 900 (<code>while (analogRead(A0) > 900)</code>), move the motor 1 step (<code>pos += 1;</code>), run the motor (<code>stepper.run();</code>) and move to position, or pos (<code>stepper.moveTo(pos);</code>), which the sketch initiailized at 0 with the <code>int pos = 0;</code> line. <br>
+
+Chris was showing me that when the LED was connected and lit up on the breadboard, the LED sensor would get readings of somewhere in the 900s when the LED and the LED sensor were spaced as they were for this project. So, that line in the code explains that as long as the reading in the A0 pin (which is the pin connected to the LED sensor) is above 900, keep the motor running. However, when that reading dips below 900, stop the motor. This works really well given that, unobstructed, readings remain above 900, but when something comes between the LED and the LED sensor, the readings drop. The really neat thing about this code as that it connects the stepper motor and the LED/LED sensor such that the readings of the LED sensor determine whether the motor runs or stops! <br>
+
+Here's a video showing how when I put my finger between the LED and the LED sensor, the motor stops. You can see that as soon as my finger goes between the LED and the sensor, the motor stops—it's very responsive! Additionally, when flicking my finger back and forth, you can see that the motor would stop quickly and then start again, resulting in a very choppy sort of movement. This was a really cool thing to see!
+
+<video width="720" height="480" controls>
+  <source src="motor_stopping_with_finger.mov" type="video/mp4">
+</video>
+
+<h4> Next Step: Homing the Motor </h4>
+  
+Just seeing something put between the LED and the LED sensor was extremely cool. Next, though, I wanted to try to figure out a way to use this method to home the motor such that it would stop at a consistent spot each time. 
 
 
 
@@ -52,10 +180,21 @@ The website where I downloaded the file for the <code> Stepper.hr</code> library
 
 Helped me with LED sensors: https://silviafesta.github.io/PHYS_S-12/Assignments/assignment6.html <br>
 
+Helped me with units of accelation with RPM: https://calculator.academy/rpm-to-acceleration-calculator/#:~:text=The%20most%20common%20units%20for,are%20m%2Fs%5E2. <br>
+
+Helped me with the setup for the motor driver on the breadboard: https://nathanmelenbrink.github.io/ps70/12_machine/steppers.html <br>
+
+Resistor color calculator: https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-resistor-color-code <br>
+
+Help with cathodes and anodes on the breadboard: https://daycounter.com/Calculators/LED-Tutorial-Calculator.phtml#:~:text=The%20cathode%20should%20be%20connected,cathode%20marked%20in%20some%20manner. <br>
+
+AccelStepper is a libarry in Arduino that you can download <br>
+
+
 
 
 <h4> Final Notes </h4>
-Thank you so much to the teaching staff for their help with this project! <br>
+Thank you so much to the teaching staff for their help with this project! Thank you SO MUCH to Chris for his help on 4/12; I'm incredibly grateful. <br>
 
 
 </xmp>
