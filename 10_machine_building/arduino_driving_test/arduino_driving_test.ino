@@ -12,13 +12,17 @@ void setup() {
   pinMode(A0, INPUT);
   stepper.setMaxSpeed(100);
   stepper.setAcceleration(300);
-  home_motor();
+  Serial.begin(115200);
 }
 
 void loop() {
+  int pinState = analogRead(A0);
+  Serial.write(pinState);
+  
   while (analogRead(A0) > 900) {
     pos += 1;
     stepper.run();
     stepper.moveTo(pos);
+    //Serial.write(A0);
   }
 }
