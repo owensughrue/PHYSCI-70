@@ -27,9 +27,19 @@
 
   <h1> Week 11: Computer Programming </h1>
 
-  <h2> Controlling/Homing a Stepper Motor Using an LED and an LED sensor </h2>
+  <h2> Displaying a Serial.Write Function using p5.js </h2>
 
-Last updated: April 18, 2022
+Last updated: April 19, 2022
+
+I wanted to expand on last week's project for this week. Last week, Chris helped me control the stop and start of a stepper motor using an LED. For this week, I wanted to display something regarding the status of the motor/LED sensor on my computer. There are a few neat options for this and I decided to choose p5.js for this week. I followed [this tutorial](https://itp.nyu.edu/physcomp/labs/labs-serial-communication/lab-serial-input-to-the-p5-js-ide/) very closely to set up my p5.js page. <br>
+
+I was able to use the same Arduino code as last week, with just a few modifications, namely with the addition of something to display the reading of the LED sensor using a <code>Serial.begin(9600);</code> and <code>serial.println</code> function. One really neat thing about the using the Serial monitor for this week (and eventually displaying sensor information on p5) was that I started by using the <code>serial.Write</code> function, but eventually moved to <code>serial.print</code> and finally <code>serial.println</code>. I learned that "print" will display values from a sensor reading and ln goes to a new line each time! At first, I was having crazy long strings of numbers, like 5723894723785475982743236492348753498572034710873498572394872394529837419837429834729837428374 which wouldn't be very helpful, because I couldn't get a sensor reading in a new line! <br>
+
+Here's a screen recorded video of the reading in p5.js:
+
+<video width="720" height="480" controls>
+  <source src="serial_reading.mov" type="video/mp4">
+</video>
 
 
 <!--
@@ -44,6 +54,10 @@ width="720" height="480">
 
 
 <h4> Helpful Links </h4>
+
+Helped me learn the <code>Serial.print</code> command: https://www.arduino.cc/reference/en/language/functions/communication/serial/print/ <br>
+
+
 
 <!--
 
