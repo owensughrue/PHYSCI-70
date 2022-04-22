@@ -93,11 +93,10 @@ The red wire pin connected to GND in the microcontroller connects to the breadbo
 
 Here's the logic for the breadboard with the motor driver: <br>
 
-The red wire at the bottom of the breadboard with the LEDs connects power from that breadboard (power from the microcontroller, not the power supply) to the motor driver on the other breadboard. 
+The red wire at the bottom of the breadboard with the LEDs connects power from that breadboard (power from the microcontroller, not the power supply) to the motor driver on the other breadboard. Additionally, the wires from the power unit connect to two pins of the motor driver as well. <br>
 
-<!-- 
-  MENTION HOW POWER AND GROUND CONNECT FROM THE POWER SUPPLY TO THE MOTOR DRIVER AND IF POSSIBLE TRY TO IDENTIFY WHAT KIND OF MOTOR DRIVER THIS IS AND NAME ALL OF THE CONNECTIONS
--->
+<!-- What kind of motor driver is this? Also are those pins from the power unit power and ground? Does that pin from the breadboard connect power from the microcontroller to the power pin on the motor driver?
+  -->
 
 <h4> Code </h4>
 
@@ -118,7 +117,7 @@ void setup() {<br>
   pinMode(A0, INPUT);<br>
   stepper.setMaxSpeed(100);<br>
   stepper.setAcceleration(300);<br>
-  home_motor();<br>
+  // home_motor();<br>
 }<br>
 <br>
 void loop() {<br>
@@ -155,21 +154,19 @@ Here's a video showing how when I put my finger between the LED and the LED sens
 
 <h4> Next Step: Homing the Motor </h4>
   
-Just seeing something put between the LED and the LED sensor was extremely cool. Next, though, I wanted to try to figure out a way to use this method to home the motor such that it would stop at a consistent spot each time. <br>
-
-<!--
+Just seeing something put between the LED and the LED sensor was extremely cool. Next, though, I wanted to try to figure out a way to use this method to "home" the motor such that it would stop at a consistent spot each time. <br>
 
 I experimented a little bit with the best way to arrange the LEDs and the motor attachments so that the motor could start in the same position each time. I first tried just attaching duct tape to the wooden attachment I made to the motor so that the tape hanged down as sort of a drooping flag. This method was okay, but the tape would often get caught up a little bit in the wires and breadboard and it wasn't the most consistent method to home the motor. <br>
 
 Next, I tried a more precise method of ensuring that the motor could stop in the correct position each time. For this, I decided to measure the length of the wooden pole to the LED and LED sensor to try to find the correct length for an attachment to the wooden pole. For this, I glued on a wooden attachment from the wooden pole down so that the attachment would intersect the distance between the LED and the LED sensor without contacting the wires. <br>
 
-Here's a video of this in action:
+Here's a video of this in action. I try to explain the circuit and how this homes the motor: <br>
 
 <video width="720" height="480" controls>
   <source src="motor_with_attachment.mov" type="video/mp4">
 </video>
 
-It was important to make sure that the breadboards and the motor were in the same position so that the motor would start at the same (or very close to the same) angle each time. To get the motor started again, you can move the breadboard to the side so that the LED sensor gets a sufficiently high reading again for the motor to start. To try to get as close as possible back to the same position, I made an outline of where the breadboard should be so that the motor will intersect the line between the LED and the sensor (see below):
+It was important to make sure that the breadboards and the motor were in the same position so that the motor would start at the same (or very close to the same) angle each time. To get the motor started again, you can move the breadboard to the side so that the LED sensor gets a sufficiently high reading again for the motor to start. To try to get as close as possible back to the same position, I made a structure using clamps and the drill bit containers (careful not to push the drill bit containers too tightly!) to ensure that the breadboard could get as close as possible to the same position each time to "home" the motor. Here's a video below: <br>
 
 <img src="breadboard_outline.png"
 alt="breadboard_outline"
@@ -178,10 +175,8 @@ width="720" height="480">
 Here's a video of the motor running and moving the breadboard back and forth so the motor will stop in a similar position each rotation.
 
 <video width="720" height="480" controls>
-  <source src="motor_running_while_moving_breadboard.mov" type="video/mp4">
+  <source src="motor_spinning_and_homing.mov" type="video/mp4">
 </video>
-
--->
 
 
 
