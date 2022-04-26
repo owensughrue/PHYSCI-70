@@ -33,14 +33,98 @@ Last updated: April 19, 2022
 
 I wanted to expand on last week's project for this week. Last week, Chris helped me control the stop and start of a stepper motor using an LED. For this week, I wanted to display something regarding the status of the motor/LED sensor on my computer. There are a few neat options for this and I decided to choose p5.js for this week. I followed [this tutorial](https://itp.nyu.edu/physcomp/labs/labs-serial-communication/lab-serial-input-to-the-p5-js-ide/) very closely to set up my p5.js page. <br>
 
-I was able to use the same Arduino code as last week, with just a few modifications, namely with the addition of something to display the reading of the LED sensor using a <code>Serial.begin(9600);</code> and <code>serial.println</code> function. One really neat thing about the using the Serial monitor for this week (and eventually displaying sensor information on p5) was that I started by using the <code>serial.Write</code> function, but eventually moved to <code>serial.print</code> and finally <code>serial.println</code>. I learned that "print" will display values from a sensor reading and ln goes to a new line each time! At first, I was having crazy long strings of numbers, like 5723894723785475982743236492348753498572034710873498572394872394529837419837429834729837428374 which wouldn't be very helpful, because I couldn't get a sensor reading in a new line! <br>
+<h4> Part 1: Reading a sensor value in p5.js </h4>
 
-Here's a screen recorded video of the reading in p5.js:
+<h5> Part 1A: Arduino Code for this Project </h5>
+
+I was able to use the same Arduino code as last week, with just a few modifications, namely with the addition of something to display the reading of the LED sensor using a <code>Serial.begin(9600);</code> and <code>serial.println</code> function. One really neat thing about the using the Serial monitor for this week (and eventually displaying sensor information on p5) was that I started by using the <code>serial.Write</code> function, but eventually moved to <code>serial.print</code> and finally <code>serial.println</code>. I learned that "print" will display values from a sensor reading and ln goes to a new line each time! At first, I was having crazy long strings of numbers, like 5723894723785475982743236492, which wouldn't be very helpful, because I couldn't get a sensor reading in a new line! <br>
+
+In addition to seeing the data in the Serial Monitor in Arduino, it was important to see the data in p5.js.
+
+Here's a screen recorded video of the reading in p5.js (graph version):
 
 <video width="720" height="480" controls>
   <source src="serial_reading.mov" type="video/mp4">
 </video>
 
+
+
+The code for working in p5:
+
+<pre><code>
+  
+let serial; // variable to hold an instance of the serialport library
+let portName = '/dev/cu.usbmodem1421';  // fill in your serial port name here
+let inData;                             // for incoming serial data
+let xPos = 0;                     // x position of the graph
+ 
+function setup() {
+  createCanvas(400, 300);
+  background(0x08, 0x16, 0x40);
+  
+  serial = new p5.SerialPort(); // make a new instance of the serialport library
+  serial.on('list', printList); // set a callback function for the serialport list event
+  serial.on('connected', serverConnected); // callback for connecting to the server
+  serial.on('open', portOpen);        // callback for the port opening
+  serial.on('data', serialEvent);     // callback for when new data arrives
+  serial.on('error', serialError);    // callback for errors
+  serial.on('close', portClose);      // callback for the port closing
+ 
+  serial.list(); // list the serial ports
+  serial.open(portName);              // open a serial port
+}
+ 
+// get the list of ports:
+function printList(portList) {
+  // portList is an array of serial port names
+  for (var i = 0; i < portList.length; i++) {
+    // Display the list the console:
+    console.log(i + portList[i]);
+  }
+}
+
+function serverConnected() {
+  console.log('connected to server.');
+}
+ 
+function portOpen() {
+  console.log('the serial port opened.')
+}
+ 
+function serialEvent() {
+  inData = Number(serial.read());
+}
+ 
+function serialError(err) {
+  console.log('Something went wrong with the serial port. ' + err);
+}
+ 
+function portClose() {
+  console.log('The serial port closed.');
+}
+
+function graphData(newData) {
+  // map the range of the input to the window height:
+  var yPos = map(newData, 0, 255, 0, height);
+  // draw the line in a pretty color:
+  stroke(0xA8, 0xD9, 0xA7);
+  line(xPos, height, xPos, height - yPos);
+  // at the edge of the screen, go back to the beginning:
+  if (xPos >= width) {
+    xPos = 0;
+    // clear the screen by resetting the background:
+    background(0x08, 0x16, 0x40);
+  } else {
+    // increment the horizontal position for the next reading:
+    xPos++;
+  }
+}
+
+function draw() {
+  graphData(inData);
+}
+  
+</code></pre>
 
 <!--
 <video width="720" height="480" controls>
@@ -64,6 +148,8 @@ This is the editor in p5.js: https://editor.p5js.org/ <br>
 I downloaded p5.serialcontrol from here: https://github.com/p5-serial/p5.serialcontrol/releases/tag/0.1.2 <br>
 
 Made my GIF for this week's image on the home page: https://makeagif.com/ <br>
+
+Helped me make a code block for my code: https://stackoverflow.com/questions/4611591/code-vs-pre-vs-samp-for-inline-and-block-code-snippets <br>
 
 
 
