@@ -39,6 +39,55 @@ I wanted to expand on last week's project for this week. Last week, Chris helped
 
 I was able to use the same Arduino code as last week, with just a few modifications, namely with the addition of something to display the reading of the LED sensor using a <code>Serial.begin(9600);</code> and <code>serial.println</code> function. One really neat thing about the using the Serial monitor for this week (and eventually displaying sensor information on p5) was that I started by using the <code>serial.Write</code> function, but eventually moved to <code>serial.print</code> and finally <code>serial.println</code>. I learned that "print" will display values from a sensor reading and ln goes to a new line each time! At first, I was having crazy long strings of numbers, like 5723894723785475982743236492, which wouldn't be very helpful, because I couldn't get a sensor reading in a new line! <br>
 
+Here's the Arduino code for this week (AccelStepper.h surrounded by <>'s in the actual code): <br>
+
+<pre><code>
+  
+# include AccelStepper.h
+
+const int stepPin = 13;   // blue
+const int dirPin = 12;   // orange
+
+// Define a stepper and the pins it will use
+AccelStepper stepper(1, stepPin, dirPin);  // initialize accelstepper for a two wire board
+
+int pos = 0;
+
+void setup() {
+  pinMode(A0, INPUT);
+  stepper.setMaxSpeed(100);
+  stepper.setAcceleration(300);
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  int pinState = analogRead(A0);
+  Serial.println(pinState);
+  
+  while (analogRead(A0) > 900) {
+    pos += 1;
+    stepper.run();
+    stepper.moveTo(pos);
+  }
+}
+
+</code></pre>
+
+See [last week's page](./11_computer_programming/index.html) for my explanation of the arduino code. So, although I sort of worked backwards in my progress for this week's project, here is a video of Serial Monitor data in the Arduino. I think it's helpful to see this first because my displays of the data progress from the Serial Monitor Here to a reading of sensor data in p5.js to representing data graphically in p5.js. <br>
+
+Below is a video of the Serial Monitor data in Arduino. I recommend going full screen because it's a little difficult ro see the Serial data show up on my computer. If you look closely, though, you can see that the Serial Monitor is only displaying values when the wooden part attached to the motor obstructs the path of the LED and LED sensor so that the motor stops. I think that this has to do with the condition in the code that tells the motor to run if the reading that the LED sensor is > 900. My guess is that there must be a similar command for the Serial Monitor in Arduino that tells the Monitor only to display values if the LED sensor reading is above 900 as well. I try to point out the changes in the Serial Monitor when the motor is and isn't running. <br>
+
+<video width="720" height="480" controls>
+  <source src="motor_and_serial_monitor.mov" type="video/mp4">
+</video>
+
+
+
+
+
+
+
 In addition to seeing the data in the Serial Monitor in Arduino, it was important to see the data in p5.js.
 
 Here's a screen recorded video of the reading in p5.js (graph version):

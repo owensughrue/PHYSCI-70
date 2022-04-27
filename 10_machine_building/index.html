@@ -102,7 +102,7 @@ The red wire at the bottom of the breadboard with the LEDs connects power from t
 
 Here is the Arduino code for this project ("AccelStepper.h" is surrounded by "<" and ">" in the actual code and thank you to Chris for the code!):
 
-<code>
+<pre><code>
 &#35; include AccelStepper.h
 <br>
 const int stepPin = 13;   // blue<br>
@@ -126,7 +126,7 @@ void loop() {<br>
     stepper.run();<br>
     stepper.moveTo(pos);<br>
   }<br>
-}</code> <br>
+}</pre></code> <br>
 
 Here's my understanding of the code and how this part of the project works. The first two lines communicate from the Arduino to the microcontroller to the motor driver to the stepper motor that pin 12 and pin 13 on the microcontroller are in charge of step and direction. As you can see on the diagram, the black wire connects from pin 12 on the microcontroller to the farthest right pin on the motor driver, the direction pin. Similarly, the blue wire connects from pin 13 on the microcontroller to the second most right pin on the motor driver, the step pin. <br>
 
