@@ -29,7 +29,7 @@
 
 
 
-### Wind Compass
+<h2> Wind Compass </h2>
 
 After going through the semester, I've decided that I'd like to make a wind compass for my final project. My hometown (Marion, MA) is near the ocean and Buzzards Bay. It is nearly always windy. I don't sail, but I do like to know the direction from which the wind is coming; the southwest breezes of the summer and the northwest winds of the winter feel quite different! My thinking is that a small-scale wind compass could help sailers or others who need to know the direction of the wind. <br>
 
@@ -43,7 +43,43 @@ Image source: [Brainy Bits Tutorial Page](https://www.brainy-bits.com/post/build
 
 <h4> Factoring in the Wind </h4>
 
-Given that compass has a box, I will insert a wind vein through the circle of LED lights. Looking at the box from above, it will be clear both which direction is north and which direction the wind is blowing. 
+Given that compass has a box, I will insert a wind vein through the circle of LED lights. Looking at the box from above, it will be clear both which direction is north and which direction the wind is blowing. <br>
+
+<h2> Starting the Project </h2>
+
+<h4> Making Connections: Soldering Wires onto Pins in the HMC-5883L Module and Circle of LEDs </h4>
+
+First, I wanted to get the compass up and working, so I could figure out the best way to orient the parts and make a box and wind vein to fit the parts needed for the compass (microcontroller, battery holder, HMC-5883L module, circle of LEDs, and wires) rather than fitting the comass parts to the box. The very first step was soddering on the wires to the HMC-5883L module and the circle of LEDs. Here's the picture of the connections from the Brainy Bits page: <br>
+
+<img src="compass_connections.png"
+alt="Compass Connections"
+width="720" height="480"> <br>
+
+Image source: [Brainy Bits Tutorial Page](https://www.brainy-bits.com/post/build-an-arduino-rgb-led-ring-compass)
+
+I soldered on wires to the pins of the HMC-5883L module and circle of LEDs that I'd need to connect to the microcontroller for the compass. <br>
+
+Here's a picture of the soldered wires onto the HMC-5883L module: <br>
+
+<img src="soldered_hmc_5883l_module.png"
+alt="Compass Connections"
+width="720" height="480"> <br>
+
+Here's a picture of the soldered wires onto the circle of LEDs:
+
+<img src="soldered_circle_of_leds.png"
+alt="Compass Connections"
+width="720" height="480"> <br>
+
+I'm definitely not the best solderer in the world. Thank you to Gabby for her help with soldering methods, and with desoldering using the copper braid! I originally had too much solder on some of the connections for the circle of LEDs and used the desoldering braid to remove some of the excess so the connections wouldn't be off. Having learned my lesson with the circle of LEDs, I used less solder for the HMC-5883L module, doing my best to ensure that none of the soldering material used to connect the pins connected to any other pins' soldering material. <br>
+As a quick side note and illustration of what *not* to do when soldering, below is a picture of one of my attempts from a project earlier this semester. Ibrahim very kindly explained at the time that my soldering "could be improved." Knowing what I know now, sheesh! It sure could! The problem with these connections was that the soldering metal from one pin to another was totally connected so the jumper wires that were meant to connect to specific pins weren't distinctly connected; everything sort of was connected to everything else, which would make the circuit a bit of a mess! <br>
+
+<img src="bad_soldering.png"
+alt="Bad Soldering!"
+width="720" height="480"> <br>
+
+Again, what *not* to do! :)
+
 
 <!--
 
