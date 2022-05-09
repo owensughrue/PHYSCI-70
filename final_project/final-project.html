@@ -72,14 +72,34 @@ alt="Compass Connections"
 width="720" height="480"> <br>
 
 I'm definitely not the best solderer in the world. Thank you to Gabby for her help with soldering methods, and with desoldering using the copper braid! I originally had too much solder on some of the connections for the circle of LEDs and used the desoldering braid to remove some of the excess so the connections wouldn't be off. Having learned my lesson with the circle of LEDs, I used less solder for the HMC-5883L module, doing my best to ensure that none of the soldering material used to connect the pins connected to any other pins' soldering material. <br>
+
 As a quick side note and illustration of what *not* to do when soldering, below is a picture of one of my attempts from a project earlier this semester. Ibrahim very kindly explained at the time that my soldering "could be improved." Knowing what I know now, sheesh! It sure could! The problem with these connections was that the soldering metal from one pin to another was totally connected so the jumper wires that were meant to connect to specific pins weren't distinctly connected; everything sort of was connected to everything else, which would make the circuit a bit of a mess! <br>
 
 <img src="bad_soldering.png"
 alt="Bad Soldering!"
 width="720" height="480"> <br>
 
-Again, what *not* to do! :)
+<b> Again, what *not* to do! :) </b> <br>
 
+Given that I'd be putting the wires inside of a box and likely moving things around, I wanted to make sure I had some flexibility with the wires. While the wires I'd used initially to link the circle of LEDs and the HMC-5883L module with the microcontroller were totally fine, the wires were a little bit stiff and I just wanted to have some flexibility, especially because I thought I'd be moving them around. To do that, I kept the soldered parts of those wires attached to the circle of LEDs and the HMC-5883L, but snipped the wires much closer to both of those tools and attached a female-male jumper wire to those wires. I chose those wires because they're quite a bit looser and less stiff than the wires I'd used before. This new method would give me some flexibility. <br>
+
+Here are some pictures of the new wires attached to the LEDs and HMC-5883L:
+
+<img src="new_wires_on_leds.png"
+alt="new_wires_on_leds"
+width="720" height="480"> <br>
+
+<img src="new_wires_on_hmc_5883l.png"
+alt="new_wires_on_hmc_5883l"
+width="720" height="480"> <br>
+
+Once the wires were properly soldered onto both the circle of LEDs and the HMC-5883L module, I tried to get the compass up and running. I was having a lot of trouble with the calibration process. I kept getting completely different calibration numbers when trying to calibrate the compass. Something seemed off, because whenever I'd move the compass around, the LEDs would move in the direction I was moving the compass, rather than staying in place (as they were supposed to continue to point north). <br>
+
+Here's a video showing what I'm talking about with the LEDs:
+
+<video width="720" height="480" controls>
+  <source src="leds_moving_wrong_direction.mov" type="video/mp4">
+</video>
 
 <!--
 
@@ -95,6 +115,8 @@ width="720" height="480">
 
 
 ### For Fun: Idea #1 (Not My Actual Final Project): Pizza Spreader
+
+<h4> My original Final Project proposal from the first week of class </h4>
 
 In my final project, I plan to build a tool that can help people spread pizza sauce evenly on their homemade pizza. Though many restaurants have proper tools to ensure that chefs can evenly spread the sauce on their pizzas, the tool I plan to build could help people who are making their pizza at home, not requiring them to have other restaurant-quality cooking equipment. Given that the pandemic has prompted people to learn how to make foods and other items that they may have bought previously, my hope is that this can make the prospect of making pizza at home more enjoyable for those who choose to cook in their homes. I have seen an industrial type machine that spreads pizza evenly, but none designed for in-home, more personal use. <br>
 <br>
