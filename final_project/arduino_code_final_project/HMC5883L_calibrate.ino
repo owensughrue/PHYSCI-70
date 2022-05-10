@@ -55,7 +55,7 @@ void loop()
   offX = (maxX + minX)/2;
   offY = (maxY + minY)/2;
 
- Serial.print(mag.XAxis);
+/* Serial.print(mag.XAxis);
   Serial.print(":");
   Serial.print(mag.YAxis);
   Serial.print(":");
@@ -66,7 +66,7 @@ void loop()
   Serial.print(minY);
   Serial.print(":");
   Serial.print(maxY);
-  Serial.print(":"); 
+  Serial.print(":"); */
   Serial.print(offX);
   Serial.print(":");
   Serial.print(offY);
