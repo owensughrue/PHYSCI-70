@@ -85,9 +85,23 @@ Given that I'd be putting the wires inside of a box and likely moving things aro
 
 <h3> Making the Box </h3>
 
+<h4> Laser Cutting the Material </h4>
+
+To make the box for the compass, I'd planned to use woodor something like it. I ran the wood through the scroll saw, but the edges weren't exact. I was worried that uneven edges and sizes could make building the box difficult. So, I decided to use different material and laser cut it to make sure the sizes of the boxes were the same. <br>
+
+Below is a video of the laser cutter cutting through the material. I'm not sure exactly what the material is called, but it's sort of a cross between wood and cardboard. A few things I'd say to note about this material. First, it's really tough to laser cut—not in the sense of actual maual labor on our part, it's just that the material is really hard to get through. I had to use 97.5% power and run through the material 6 or 7 times on between 2.5 and 7.5 speed to get the material to a point where I could use an Exacto knife to cut out the squares. Second, and more importantly, <b>Nathan menioned that this material has some glues that aren't great to breathe in, so make sure to let the laser cutter sit for a little while after cutting so the fumes can go away and be careful not to inhale much</b>. <br>
+
+<video width="720" height="480" controls>
+  <source src="laser_cutting.mov" type="video/mp4">
+</video> <br>
+<br>
+Always fun to watch the laser cutter. <b>Again, be careful when using this material not to inhale and to let the laser cutter absorb any potentially harmful materials that it released while cutting!</b>
+
+I sort of learned the hard way that the laser cutter works best when cutting more than once through material when it can cut the same lines each time. I learned to leave the material in for a few passes through and then try to take it out when I thought I'd be able to get the squares out with an exacto knife rather than having to line up the squares each time so the path would be the same. <br>
+
 <h4> Starting from the Bottom </h4>
 
-To make the box for the compass, I wanted to try to use no metal, or as little metal as possible, because [the tutorial](https://www.brainy-bits.com/post/build-an-arduino-rgb-led-ring-compass) that I followed mentioned that the compass was very affected by metal. So, I decided to glue my box together rather than use nails or anything. I wanted to make sure the box was big enough to fit the power unit, the microcontroller, and the pole for the wind vane. Here's a picture of how the box came out. <br>
+I wanted to try to use no metal, or as little metal as possible, because [the tutorial](https://www.brainy-bits.com/post/build-an-arduino-rgb-led-ring-compass) that I followed mentioned that the compass was very affected by metal. So, I decided to glue my box together rather than use nails or anything. I wanted to make sure the box was big enough to fit the power unit, the microcontroller, and the pole for the wind vane. Here's a picture of how the box came out. <br>
 
 <img src="compass_box.png"
 alt="compass_box"
@@ -115,9 +129,13 @@ width="720" height="480"> <br>
 
 <h3> Getting the Compass Up and Running </h3>
 
+<h4> Code </h4>
+
 Once the wires were properly soldered onto both the circle of LEDs and the HMC-5883L module, I tried to get the compass up and running. I was having a lot of trouble with the calibration process. I kept getting completely different calibration numbers when trying to calibrate the compass. Something seemed off, because whenever I'd move the compass around, the LEDs would move in the direction I was moving the compass, rather than staying in place (as they were supposed to continue to point north). <br>
 
 Thankfully, Nathan helped me find new code to use in Arduino to make sure that the compass worked better. Much of the code came from [this website](https://github.com/sleemanj/HMC5883L_Simple/blob/master/HMC5883L_Simple/examples/Compass/Compass.ino). My understanding is that this code helped with setting the declination and calibrating the compass, then telling the LEDs what to do. What had been happening before was that I kept getting different numbers when calibrating. The code I'd use for the final combination of the HMC-5883L and LED lights required a couple of inputs and numbers from calibrating the HMC-5883L.
+
+My code is a combination of code from [this GitHub repository](https://github.com/sleemanj/HMC5883L_Simple/blob/master/HMC5883L_Simple/examples/Compass/Compass.ino) and [this tutorial](https://www.brainy-bits.com/post/build-an-arduino-rgb-led-ring-compass).
 
 Here's the Arduino code that I'm using (the "#include" lines for Arduino.h, Wire.h, HMC5883L_Simple.h, and HMC5883L.h are surrounded by <>'s):
 
@@ -271,11 +289,23 @@ void loop()
 
 </code></pre>
 
+Here's my general understanding of the code. The first few lines are setting up libraries, as usual. Then, we define the number of LEDs in the <code>NUM_LEDS 16</code> line. We then tell the microcontroller that pin 3 is connected to the microcontroller from the LEDs. Then, we start a monitor of the data coming from the HMC-5883L module. We get the declination from the http://www.magnetic-declination.com/ website. The comments in the line explain most of the code better than I can, but we explain that we want to see the data only when we request that information, the scale explains how sensitive the HMC-5883L is, and we set the orientation such that the X side of the HMC-5883L module so that when X points north, that's what we'll see on the compass. <br>
+
+Then, we set the <code>heading</code> as the reading that we want, and print that number. We subtract 30 in the <code>float heading = Compass.GetHeadingDegrees() - 30;</code>line because Nathan and I noticed that the readings seemed about 30 degrees off when looking at them in the serial monitor. We then map the data that we get from the HMC-5883L onto the LEDs, surrounding the red LED with two green LEDs. Lastly, we choose the brightness and make a quick delay so that the readings are not constant, but still come often enough. <br>
+
+<h4> Trying Out the Compass </h4>
+
 Though the LEDs can be a bit laggy at times and do not always seem 100% accurate, the compass is working better than it was previously. Here's a photo of the compass. The red light is supposed to point to the north. Here, it worked pretty well! I put my phone next to the compass to see where that said north was, and they're pretty similar! <br>
 
 <img src="compass_demo.png"
 alt="compass_demo"
-width="720" height="480">
+width="720" height="480"> <br>
+
+Underneath the LEDs and the HMC5883L module above would be the power unit (pictured below). <br>
+
+<img src="power_unit.png"
+alt="power_unit"
+width="720" height="480"> <br>
 
 Here's a video of the compass moving around. <br>
 
@@ -290,7 +320,9 @@ Now, that was a 180 degree rotation. You can see the LEDs on the circle return t
 alt="hmc_5883l_close"
 width="480" height="360"> <br>
 
-However, the compass runs with at least some consistency. I also notice that the compass might to do better with larger jumps rather than small incremental rotations. I'm not sure exactly why this is, but it seems to me like the compass is most accurate when moving in 180 degree turns after it starts facing north. <br>
+However, the compass runs with at least some consistency. I also think that the compass might to do better with larger jumps rather than small incremental rotations. I'm not sure exactly why this is, but it seems to me like the compass is most accurate when moving in 180 degree turns after it starts facing north. <br>
+
+I think that the <code>Compass.SetOrientation(COMPASS_HORIZONTAL_X_NORTH);</code> has something to do with why the compass seems to work best when X is pointing north. My gut tells me that a decent strategy to find north would be to find the point at which the LED is aligned as closely as possible with the X direction of the HMC-5883L module. I think that the X side of the HMC-5883L might have the strongest indicator of north, so I think that might be a good strategy. The compass is definitely not incredibly consistent and that may have to do with the metal in the room or an issue with the code/parts, but I think it's better than it was before and I think the matching X direction strategy might work. <br>
 
 <h3> Ice in the (Wind) Vanes: Making the Wind Vane </h3>
 
@@ -372,12 +404,39 @@ width="720" height="480">
 
 -->
 
+<h3> Thank Yous </h3>
+
+Thank you so much to the entire teaching staff for their help with this project. I'm incredibly grateful for all of your help with this project and throughout the semester.
+
 <h3> Helpful Links </h3>
 
 Provided much of the code I used to make the compass: https://github.com/sleemanj/HMC5883L_Simple/blob/master/HMC5883L_Simple/examples/Compass/Compass.ino <br>
 
 I followed this tutorial for much of my project: https://www.brainy-bits.com/post/build-an-arduino-rgb-led-ring-compass <br>
 
+Premiere Pro Help (all of the following links until mentioned otherwise):
+
+https://blog.pond5.com/8629-how-to-create-video-titles-in-adobe-premiere-pro/ <br>
+
+https://www.youtube.com/watch?v=V5sENw2C97s <br>
+
+https://helpx.adobe.com/premiere-pro/using/transition-overview-applying-transitions.html <br>
+
+https://www.youtube.com/watch?v=JfWQAISeZjw&ab_channel=2LoL <br>
+
+https://www.evercast.us/blog/how-to-crop-a-video-in-premiere <br>
+
+https://filtergrade.com/delete-audio-in-premiere-pro-cc/ <br>
+
+https://www.mediacollege.com/adobe/premiere/pro/effects/effect-controls-window.html <br>
+
+https://www.youtube.com/watch?v=vUr_09_-_yw <br>
+
+https://www.youtube.com/watch?v=gPaIyzIX4eU&ab_channel=RobNunn <br>
+
+https://www.youtube.com/watch?v=FYDa5ACSko4 <br>
+
+https://democreator.wondershare.com/video-editor/how-to-resize-video-in-premiere.html <br>
 
 
 
